@@ -133,3 +133,4 @@ INTERNAL_IPS = [
 ]
 
 TAILWIND_APP_NAME = 'theme'
+
