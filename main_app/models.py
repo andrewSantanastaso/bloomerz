@@ -33,6 +33,7 @@ class Plot(models.Model):
 class Plant(models.Model):
     name=models.CharField(max_length=100)
     dayssinceplanted=models.IntegerField()
+    daysuntilmature=models.IntegerField()
     description=models.TextField(max_length=250)
     plot=models.ForeignKey(Plot, on_delete=models.CASCADE)
 
