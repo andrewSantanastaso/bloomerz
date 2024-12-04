@@ -8,16 +8,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	{% tailwind_css %}
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'assets' %}">
 </head>
 
 <body>
-	<!-- <div class="container mx-auto">
-		<section class="flex items-center justify-center h-screen">
-			<h1 class="text-5xl">Hello World</h1>
-		</section>
-	</div> -->
-	{% block content %}
-	{% endblock %}
+	<header>
+		<nav class="bg-green-500 border border-gray-900">
+
+			<div class="flex justify-between items-center px-4 py-2">
+				<div>
+					<h1>Bloomerz</h1>
+				</div>
+				<div>
+					<ul class="flex space-x-4">
+						<li><a href="{% url 'home' %}">Home</a></li><span>|</span>
+						<li><a href="{% url 'garden-index' %}">My Gardens</a></li><span>|</span>
+						<li><a href="{% url 'plot-index'}">My Plots</a></li><span>|</span>
+						<li><a href="{% url 'plant-index' garden_id=1 plot_id=1 %}">My Plants</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		{% block content %}
+		{% endblock %}
 
 </body>
 
