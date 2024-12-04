@@ -1,9 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from .models import Garden, Plot, Plant
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 # Create your views here.
 
 def signup(request):
@@ -26,15 +27,24 @@ class Home(LoginView):
     template_name = 'home.html'
     
 def garden_index(request):
-    gardens = Garden.objects.all()
+    gardens = Garden.objects.filter(user=request.user)
+    plots = []
     for garden in gardens:
-        plots = garden.plot_set.all()
+        plots.extend(garden.plot_set.all())
     return render(request, 'gardens/index.html', {'gardens': gardens, 'plots': plots})
 
 def plant_index(request):
-    garden = Garden.objects.get(id=garden_id)
-    plot = Plot.objects.get(id=plot_id)
-    return render(request, 'plants/index.html', {'garden': garden, 'plot': plot})
+    garden = Garden.objects.filter(user=request.user)[:1].get()
+    plots = Plot.objects.filter(garden=garden)
+    plants = []
+    for plot in plots:
+        plants.extend(plot.plant_set.all())
+    return render(request, 'plants/index.html', {'plants': plants})
+
+def plot_index(request):
+    garden = Garden.objects.filter(user=request.user)[:1].get()
+    plots = garden.plot_set.all()
+    return render(request, 'plots/index.html', { 'plots': plots})
 
 class garden_detail(DetailView):
     model = Garden
@@ -55,9 +65,7 @@ class GardenDelete(DeleteView):
     template_name = 'gardens/delete.html'
     success_url = '/gardens/'
 
-class plot_index(ListView):
-    model = Plot
-    template_name = 'plots/index.html'
+
 
 class CreatePlot(CreateView):
     model = Plot
