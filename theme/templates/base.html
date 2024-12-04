@@ -21,17 +21,33 @@
 					<h1>Bloomerz</h1>
 				</div>
 				<div>
+					{% if user.is_authenticated %}
 					<ul class="flex space-x-4">
 						<li><a href="{% url 'home' %}">Home</a></li><span>|</span>
 						<li><a href="{% url 'garden-index' %}">My Gardens</a></li><span>|</span>
-						<li><a href="{% url 'plot-index'}">My Plots</a></li><span>|</span>
-						<li><a href="{% url 'plant-index' garden_id=1 plot_id=1 %}">My Plants</a></li>
+						<li><a href="{% url 'plot-index'  %}">My Plots</a></li><span>|</span>
+						<li><a href="{% url 'plant-index' %}">My Plants</a></li>
+						<li>
+							<form id="logout-form" method="post" action="{% url 'logout' %}">
+								{% csrf_token %}
+								<button id="logout-form" type="submit">Log out</button>
+							</form>
+						</li>
+						{% else %}
+
+						<ul class="flex space-x-2">
+							<li><a href="{% url 'signup' %}">Sign Up</a></li><span>|</span>
+							<li><a href="{% url 'login' %}">Login</a></li>
+
+						</ul>
+						{% endif %}
 					</ul>
 				</div>
 			</div>
 		</nav>
-		{% block content %}
-		{% endblock %}
+	</header>
+	{% block content %}
+	{% endblock %}
 
 </body>
 
