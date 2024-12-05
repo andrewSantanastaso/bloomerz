@@ -11,6 +11,9 @@ class Garden(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+   
+    
+
     
     
 
@@ -18,7 +21,7 @@ class Garden(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('garden-detail', kwargs={'garden_id': self.id})
+        return reverse('garden-detail', kwargs={'pk': self.id})
     
 class Plot(models.Model):
     name = models.CharField(max_length=100)
@@ -28,7 +31,7 @@ class Plot(models.Model):
     def __str__(self):
         return self.name    
     def get_absolute_url(self):
-        return reverse('plot-detail', kwargs={'plot_id': self.id})
+        return reverse('plot-detail', kwargs={'pk': self.id, 'garden_id': self.garden.id})
 
 class Plant(models.Model):
     name=models.CharField(max_length=100)
@@ -41,5 +44,4 @@ class Plant(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('plant-detail', kwargs={'plant_id': self.id})
-    
+        return reverse('plant-detail', kwargs={'pk': self.id,'plot_id': self.plot.id, 'garden_id': self.plot.garden.id})

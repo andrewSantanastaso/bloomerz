@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto ">
+    <h1 class="text-3xl font-bold">My Gardens</h1>
+    <div class="flex border">
+        {% for garden in gardens %}
+        <div class="bg-green-200 p-4 border border-gray-900 w-full ">
+            <h2 class="text-xl font-bold">{{ garden.name }}</h2>
+            <h3>{{garden.plot_set.count}}</h3>
+            {% for plot in plots %}
+            <p>{{plot.name}}</p>
+            {% endfor %}
+
+
+
+            <a href="{% url 'garden-detail' garden.id %}">View Garden</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="flex border">
+
+
+        <a href="{% url 'garden-create' %}" class="w-full">
+            <div class="bg-green-200 p-4 border border-gray-900 w-full">
+                <h2 class="text-xl font-bold">Add a Garden</h2>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+
+
+{% endblock %}
