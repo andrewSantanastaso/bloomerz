@@ -27,7 +27,7 @@
 						<li><a href="{% url 'garden-index' %}">My Gardens</a></li><span>|</span>
 						<li><a href="{% url 'plot-index'  %}">My Plots</a></li><span>|</span>
 						<li><a href="{% url 'plant-index' %}">My Plants</a></li>
-						<li>
+						<li class="border border-black border-2 p-0 m-0 rounded-md bg-gray-500">
 							<form id="logout-form" method="post" action="{% url 'logout' %}">
 								{% csrf_token %}
 								<button id="logout-form" type="submit">Log out</button>
