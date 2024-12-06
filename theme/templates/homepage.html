@@ -2,27 +2,34 @@
 
 {% block content %}
 <div class="main-content">
-    <!-- Show message only for unauthenticated users -->
+    <!-- Header shown to all users -->
+    <h1>Welcome to Bloomerz: Where Your Garden Glow-Up Begins!</h1>
+    
+    <!-- Message for unauthenticated users -->
     {% if not user.is_authenticated %}
-        <h1>Welcome to Your Garden Planner</h1>
-        <p>Sign up to cultivate your perfect garden, one plot at a time.</p>
+        <p>Sign Up and Start Curating Your Dream Garden Vibes!</p>
     {% endif %}
 
     <!-- Garden cards container -->
     <div class="card-container">
-        <!-- Dynamic Garden Cards -->
-        {% for garden in gardens %}
-        <div class="card">
-            <a href="{% url 'garden-detail' garden.id %}">
-                <h2>{{ garden.name }}</h2>
-            </a>
-        </div>
-        {% endfor %}
+        <!-- Check if user is authenticated and if gardens exist -->
+        {% if user.is_authenticated and gardens %}
+            <!-- Dynamic Garden Cards -->
+            {% for garden in gardens %}
+            <div class="card">
+                <a href="{% url 'garden-detail' garden.id %}">
+                    <h2>{{ garden.name }}</h2>
+                </a>
+            </div>
+            {% endfor %}
+        {% endif %}
 
-        <!-- Add Garden Card -->
+        <!-- Add Garden Card for authenticated users -->
+        {% if user.is_authenticated %}
         <div class="card add-card">
             <a href="{% url 'garden-create' %}">+ Add New Garden</a>
         </div>
+        {% endif %}
     </div>
 </div>
 
@@ -32,62 +39,4 @@
         margin: 0;
         padding: 0;
         background-color: #f7f5f0; /* Light cream */
-        color: #5a5a5a; /* Soft grey for text */
-    }
-    .main-content {
-        text-align: center;
-        padding: 3em;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    h1 {
-        font-size: 2.5em;
-        color: #49796b; /* Sage green */
-    }
-    p {
-        font-size: 1.2em;
-        color: #6d6d6d; /* Soft grey */
-    }
-    .card-container {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 1.5em;
-        flex-wrap: wrap;
-        margin-top: 2em;
-    }
-    .card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 220px;
-        height: 220px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        text-align: center;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card h2 {
-        font-size: 1.5em;
-        color: #49796b; /* Sage green */
-    }
-    .card a {
-        text-decoration: none;
-    }
-    .add-card {
-        font-weight: bold;
-        font-size: 1.5em;
-    }
-    .add-card a {
-        color: #49796b;
-        font-size: 1.2em;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-</style>
-{% endblock %}
+        color: #5a5a
