@@ -1,72 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloomerz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-        }
-        header {
-            background-color: #004d00;
-            color: white;
-            padding: 1em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav {
-            display: flex;
-            gap: 1em;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-        }
-        .main-content {
-            text-align: center;
-            padding: 2em;
-        }
-        .main-content h1 {
-            font-size: 1.5em;
-            margin-bottom: 1em;
-        }
-        .card {
-            display: inline-block;
-            width: 200px;
-            height: 200px;
-            border: 1px solid #ccc;
-            background-color: white;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-            margin: 1em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        .add-card {
-            font-size: 2em;
-            color: #004d00;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="logo">BLOOMERZ</div>
-        <nav>
-            <a href="#">My Gardens</a>
-            <a href="#">My Plants</a>
-            <a href="#">Sign In</a>
-        </nav>
-    </header>
-    <div class="main-content">
-        <h1>Create an Account to start planning your Garden</h1>
-        <div class="card">Garden 1</div>
-        <div class="card add-card">+</div>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="main-content">
+    <!-- Show message only for unauthenticated users -->
+    {% if not user.is_authenticated %}
+        <h1>Welcome to Your Garden Planner</h1>
+        <p>Sign up to cultivate your perfect garden, one plot at a time.</p>
+    {% endif %}
+
+    <!-- Garden cards container -->
+    <div class="card-container">
+        <!-- Dynamic Garden Cards -->
+        {% for garden in gardens %}
+        <div class="card">
+            <a href="{% url 'garden-detail' garden.id %}">
+                <h2>{{ garden.name }}</h2>
+            </a>
+        </div>
+        {% endfor %}
+
+        <!-- Add Garden Card -->
+        <div class="card add-card">
+            <a href="{% url 'garden-create' %}">+ Add New Garden</a>
+        </div>
     </div>
-</body>
-</html>
+</div>
+
+<style>
+    body {
+        font-family: "Georgia", serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f5f0; /* Light cream */
+        color: #5a5a5a; /* Soft grey for text */
+    }
+    .main-content {
+        text-align: center;
+        padding: 3em;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    h1 {
+        font-size: 2.5em;
+        color: #49796b; /* Sage green */
+    }
+    p {
+        font-size: 1.2em;
+        color: #6d6d6d; /* Soft grey */
+    }
+    .card-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 1.5em;
+        flex-wrap: wrap;
+        margin-top: 2em;
+    }
+    .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 220px;
+        height: 220px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card h2 {
+        font-size: 1.5em;
+        color: #49796b; /* Sage green */
+    }
+    .card a {
+        text-decoration: none;
+    }
+    .add-card {
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    .add-card a {
+        color: #49796b;
+        font-size: 1.2em;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+</style>
+{% endblock %}
