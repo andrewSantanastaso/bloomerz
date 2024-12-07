@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container mx-auto ">
     <h1 class="text-3xl font-bold">My Gardens</h1>
-    <div class="flex border m-3">
+    <div class="flex border gap-2">
         {% for garden in gardens %}
         <div class="bg-green-200 p-4 border border-gray-900 w-full  ">
             <h2 class="text-xl font-bold">{{ garden.name }}</h2>

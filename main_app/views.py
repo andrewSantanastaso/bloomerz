@@ -42,8 +42,11 @@ def plant_index(request):
     return render(request, 'plants/index.html', {'plants': plants})
 
 def plot_index(request):
-    garden = Garden.objects.filter(user=request.user)[:1].get()
-    plots = garden.plot_set.all()
+    user_gardens = Garden.objects.filter(user=request.user)
+    plots = []
+    for garden in user_gardens:
+        plots.extend(garden.plot_set.all())
+    
     return render(request, 'plots/index.html', { 'plots': plots})
 
 class garden_detail(DetailView):
@@ -74,17 +77,34 @@ class GardenDelete(DeleteView):
 class CreatePlot(CreateView):
     model = Plot
     fields = ['name', 'dayssincewatered']
+    labels = {'name': 'Plot Name', 'dayssincewatered': 'Days Since Watered'}
     template_name = 'plots/create.html'
     # Assigns plot with logged in user's first garden
     def form_valid(self, form):
-        user_gardens = Garden.objects.filter(user=self.request.user)
-        if user_gardens.exists():
-            form.instance.garden = user_gardens.first()
+        garden_id = self.kwargs['garden_id']
+        garden = get_object_or_404(Garden, pk=garden_id)
+        form.instance.garden = garden
+        # user_gardens = Garden.objects.filter(user=self.request.user)
+        # if user_gardens.exists():
+        #     form.instance.garden = user_gardens.first()
+            
         return super().form_valid(form)
+    
 
-class PlotDetail(DetailView):
-    model = Plot
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        garden_id = self.kwargs.get('garden_id')  # Corrected this line
+        context['garden'] = get_object_or_404(Garden, pk=garden_id)
+        return context
+    
+
+def plot_detail(request, plot_id):
+    plot = get_object_or_404(Plot, pk=plot_id)
+
     template_name = 'plots/detail.html'
+    return render(request, template_name, {'plot': plot,'garden_id': plot.garden.id})
+
+    
 
 class UpdatePlot(UpdateView):
     model = Plot

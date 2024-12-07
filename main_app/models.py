@@ -30,8 +30,9 @@ class Plot(models.Model):
 
     def __str__(self):
         return self.name    
+
     def get_absolute_url(self):
-        return reverse('plot-detail', kwargs={'pk': self.id, 'garden_id': self.garden.id})
+        return reverse('plot-detail', kwargs={'plot_id': self.id})
 
 class Plant(models.Model):
     name=models.CharField(max_length=100)
