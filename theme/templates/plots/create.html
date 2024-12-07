@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Create a New Plot</h2>
-<form method="post">
+<form method="post" action="{% url 'plot-create' garden.id %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Create Plot</button>
 </form>
 {% endblock %}
-1:00

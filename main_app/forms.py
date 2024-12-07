@@ -7,7 +7,10 @@ class GardenForm(forms.ModelForm):
 class PlotForm(forms.ModelForm):
     class Meta:
         model = Plot
-        fields = ['name', 'garden', 'dayssincewatered']
+        fields = ['name', 'dayssincewatered', 'garden']
+        labels = {
+            'dayssincewatered': 'Days Since Watered'
+        }
 class PlantForm(forms.ModelForm):
     class Meta:
         model = Plant

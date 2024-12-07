@@ -4,4 +4,7 @@
 
 {% block content %}
 <h1>{{garden.name}}</h1>
+<a href="{% url 'plot-create' garden.id%}">
+    <p>Add a Plot</p>
+</a>
 {% endblock %}
