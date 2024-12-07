@@ -23,8 +23,8 @@ def signup(request):
 
 
 
-class Home(ListView):  
-    template_name = 'home.html'
+def home(request):
+    return render(request, 'homepage.html')
     
 def garden_index(request):
     gardens = Garden.objects.filter(user=request.user)
@@ -52,8 +52,12 @@ class garden_detail(DetailView):
 
 class GardenCreate(CreateView):
     model = Garden
-    fields = '__all__'
+    fields = ['name', 'location']
     template_name = 'gardens/create.html'
+    # Assigns logged in user as the garden's owner
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class GardenUpdate(UpdateView):
     model = Garden
@@ -69,8 +73,14 @@ class GardenDelete(DeleteView):
 
 class CreatePlot(CreateView):
     model = Plot
-    fields = '__all__'
+    fields = ['name', 'dayssincewatered']
     template_name = 'plots/create.html'
+    # Assigns plot with logged in user's first garden
+    def form_valid(self, form):
+        user_gardens = Garden.objects.filter(user=self.request.user)
+        if user_gardens.exists():
+            form.instance.garden = user_gardens.first()
+        return super().form_valid(form)
 
 class PlotDetail(DetailView):
     model = Plot
@@ -90,8 +100,16 @@ class DeletePlot(DeleteView):
     
 class CreatePlant(CreateView):
     model = Plant
-    fields = '__all__'
+    fields = ['name', 'dayssinceplanted', 'daysuntilmature', 'description']
     template_name = 'plants/create.html'
+    # Assigns the plant with the first plot of the logged in user
+    def form_valid(self, form):
+        user_gardens = Garden.objects.filter(user=self.request.user)
+        if user_gardens.exists():
+            user_plots = Plot.objects.filter(garden=user_gardens.first())
+            if user_plots.exists():
+                form.instance.plot = user_plots.first()
+        return super().form_valid(form)
 
 class PlantDetail(DetailView):
     model = Plant
