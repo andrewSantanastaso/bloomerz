@@ -19,12 +19,12 @@ def signup(request):
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
+    return render(request, 'signup.html', context)
 
 
 
-class Home(LoginView):
-    template_name = 'homepage.html'
+class Home(ListView):  
+    template_name = 'home.html'
     
 def garden_index(request):
     gardens = Garden.objects.filter(user=request.user)
@@ -107,4 +107,7 @@ class DeletePlant(DeleteView):
     template_name = 'plants/delete.html'
     success_url = '/gardens/'
 
-
+class SignIn(LoginView):
+    template_name = 'login.html'
+    redirect_authenticated_user = True
+    success_url = '/gardens/'
