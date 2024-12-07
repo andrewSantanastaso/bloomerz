@@ -4,16 +4,18 @@
 {% block content %}
 <div class="container mx-auto ">
     <h1 class="text-3xl font-bold">My Gardens</h1>
-    <div class="flex border">
+    <div class="flex border m-3">
         {% for garden in gardens %}
-        <div class="bg-green-200 p-4 border border-gray-900 w-full ">
+        <div class="bg-green-200 p-4 border border-gray-900 w-full  ">
             <h2 class="text-xl font-bold">{{ garden.name }}</h2>
             <h3>{{garden.plot_set.count}}</h3>
-            {% for plot in plots %}
-            <p>{{plot.name}}</p>
+            {% for plot in garden.plot_set.all %}
+
+            <h3>{{plot.name}}</h3>
             {% endfor %}
-
-
+            {% if garden.plot_set.count == 0 %}
+            <h3>No Plots Created</h3>
+            {% endif %}
 
             <a href="{% url 'garden-detail' garden.id %}">View Garden</a>
         </div>
