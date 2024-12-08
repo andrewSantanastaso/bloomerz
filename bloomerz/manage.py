@@ -4,6 +4,11 @@ import os
 import sys
 
 
+
+# set the default Django settings module for the 'celery' program.
+
+
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bloomerz.settings')

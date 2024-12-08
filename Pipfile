@@ -7,6 +7,12 @@ name = "pypi"
 django = "*"
 django-tailwind = "*"
 psycopg2-binary = "*"
+celery = "*"
+redis = "*"
+python-dotenv = "*"
+whitenoise = "*"
+gunicorn = "*"
+dj-database-url = "*"
 
 [dev-packages]
 

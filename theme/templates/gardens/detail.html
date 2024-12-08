@@ -3,8 +3,28 @@
 
 
 {% block content %}
-<h1>{{garden.name}}</h1>
+<h1 class="flex justify-center m-auto mb-6"><strong>Garden: </strong>{{garden.name}}</h1>
+<div class="grid grid-cols-flow grid-flow-row gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-14">
+    {% for plot in garden.plot_set.all %}
+    <div class="flex justify-center align-middle">
+        <a href="{% url 'plot-detail' plot.id %}">
+            <div
+                class="bg-green-200  border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col items-center">
+                <h2 class="text-xl font-bold">{{ plot.name }}</h2>
+                <h3>Days Since Last Watering: {{plot.dayssincewatered}}</h3>
+                <p>Total Plants:{{plot.plant_set.count}}</p>
+                <div>
+                    <a class="btn-edit" href="{% url 'plot-update' plot.id %}">Edit</a>
+                    <a class="btn-delete" href="{% url 'plot-delete' plot.id %}">Delete</a>
+                    <a class="btn-water" href="{% url 'plot-water' plot.id %}">Water Plot</a>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    {% endfor %}
+</div>
 <a href="{% url 'plot-create' garden.id%}">
-    <p>Add a Plot</p>
+    <p class="text-xl font-bold flex justify-center">Add a Plot</p>
 </a>
 {% endblock %}
