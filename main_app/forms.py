@@ -1,5 +1,14 @@
 from django import forms
 from .models import Garden, Plot, Plant
+
+from django.contrib.auth.forms import UserCreationForm
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+
 class GardenForm(forms.ModelForm):
     class Meta:
         model = Garden
@@ -21,6 +30,7 @@ class PlantForm(forms.ModelForm):
             'dayssinceplanted': 'Days Since Planted',
             'daysuntilmature': 'Days Until Mature'
         }
+
 
 
 

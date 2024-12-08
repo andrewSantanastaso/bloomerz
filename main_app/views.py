@@ -8,6 +8,8 @@ from django.contrib.auth import login
 from .forms import PlotForm
 # Create your views here.
 
+
+
 def signup(request):
     error_message = ''
     if request.method == 'POST':
