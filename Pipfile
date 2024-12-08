@@ -14,7 +14,6 @@ whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
 
-
 [dev-packages]
 
 [requires]

@@ -1,1 +1,1 @@
-web: guicorn bloomerz.wsgi
+web: gunicorn bloomerz.wsgi
