@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from __future__ import absolute_import, unicode_literals
 from pathlib import Path
 from dotenv import load_dotenv
-from __future__ import absolute_import, unicode_literals
+
 import os
 from celery import Celery
 from celery.schedules import crontab
