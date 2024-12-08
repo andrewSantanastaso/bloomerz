@@ -11,6 +11,27 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+from __future__ import absolute_import, unicode_literals
+import os
+from celery import Celery
+from celery.schedules import crontab
+import dj_database_url
+
+load_dotenv()
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bloomerz.settings')
+
+app = Celery('bloomerz')
+app.config_from_object('django.conf:settings', namespace='CELERY')
+app.autodiscover_tasks()
+
+app.conf.beat_schedule = {
+    'increment_days': {
+        'task': 'main_app.tasks.increment_days_for_water',
+        'schedule': crontab(minute=0, hour=0),
+    },
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +41,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f32^^)ubxvcaiaqtyk5))^ndjug!smw=+3z*tu5rzlkh#^mqan'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if not 'ON_HEROKU' in os.environ:
+    DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -46,6 +69,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django_browser_reload.middleware.BrowserReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,13 +101,21 @@ WSGI_APPLICATION = 'bloomerz.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bloomerz',
+if 'ON_HEROKU' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.config(
+            env='DATABASE_URL',
+            conn_max_age=600, 
+            conn_health_checks=True,
+            ssl_require=True)
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'bloomerz',
+        }
+    }
 
 
 
@@ -125,6 +157,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'garden-index'
 LOGOUT_REDIRECT_URL = 'home'
