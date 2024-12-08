@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView
 from .models import Garden, Plot, Plant
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from .forms import PlotForm
 # Create your views here.
 
 def signup(request):
@@ -76,17 +77,15 @@ class GardenDelete(DeleteView):
 
 class CreatePlot(CreateView):
     model = Plot
-    fields = ['name', 'dayssincewatered']
-    labels = {'name': 'Plot Name', 'dayssincewatered': 'Days Since Watered'}
+    form_class = PlotForm
+
     template_name = 'plots/create.html'
-    # Assigns plot with logged in user's first garden
+
     def form_valid(self, form):
         garden_id = self.kwargs['garden_id']
         garden = get_object_or_404(Garden, pk=garden_id)
         form.instance.garden = garden
-        # user_gardens = Garden.objects.filter(user=self.request.user)
-        # if user_gardens.exists():
-        #     form.instance.garden = user_gardens.first()
+      
             
         return super().form_valid(form)
     
@@ -103,7 +102,11 @@ def plot_detail(request, plot_id):
 
     template_name = 'plots/detail.html'
     return render(request, template_name, {'plot': plot,'garden_id': plot.garden.id})
-
+def water_plot(request, plot_id):
+    plot = get_object_or_404(Plot, pk=plot_id)
+    plot.dayssincewatered = 0
+    plot.save()
+    return redirect('garden-detail', pk=plot.garden.id)
     
 
 class UpdatePlot(UpdateView):
@@ -113,8 +116,13 @@ class UpdatePlot(UpdateView):
 
 class DeletePlot(DeleteView):
     model = Plot
-    template_name = 'plots/delete.html'
     success_url = '/gardens/'
+    template_name = 'plots/plot_confirm_delete.html'
+
+def plot_delete(request, plot_id):
+    plot = get_object_or_404(Plot, pk=plot_id)
+    plot.delete()
+    return redirect('garden-detail', pk=plot.garden.id)
 
 
     
