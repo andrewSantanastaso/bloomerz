@@ -13,7 +13,7 @@ python-dotenv = "*"
 whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
-django_browser_reload = "*"
+
 
 [dev-packages]
 
