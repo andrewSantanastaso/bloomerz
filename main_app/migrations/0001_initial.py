@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('dayssincewatered', models.IntegerField()),
+                ('days_since_watered', models.IntegerField()),
                 ('garden', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.garden')),
             ],
         ),
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('dayssinceplanted', models.IntegerField()),
+                ('days_since_planted', models.IntegerField()),
                 ('description', models.TextField(max_length=250)),
                 ('plot', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main_app.plot')),
             ],
