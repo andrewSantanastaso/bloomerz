@@ -172,7 +172,7 @@ TAILWIND_APP_NAME = 'theme'
 
 
 CRONJOBS = [
-    ('*/1 * * * *', 'main_app.cron.update_date')
+    ('0 * * * *', 'main_app.cron.update_date')
 ]
 
 CELERY_BROKER_URL = os.getenv('REDIS_URL')
