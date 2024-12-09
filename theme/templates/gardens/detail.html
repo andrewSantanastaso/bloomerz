@@ -13,7 +13,7 @@
             <div
                 class="bg-green-200  border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col items-center">
                 <h2 class="text-xl font-bold">{{ plot.name }}</h2>
-                <h3>Days Since Last Watering: {{plot.dayssincewatered}}</h3>
+                <h3>Days Since Last Watering: {{plot.days_since_watered}}</h3>
                 <p>Total Plants:{{plot.plant_set.count}}</p>
                 <div>
                     <a class="btn-edit" href="{% url 'plot-update' plot.id %}">Edit</a>

@@ -7,7 +7,7 @@ def update_date():
     plots = Plot.objects.all()
     for plot in plots:
         
-        plot.dayssincewatered += 1 
+        plot.days_since_watered += 1 
 
         plot.save()
     return 'Days incremented'
