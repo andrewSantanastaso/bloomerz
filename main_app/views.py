@@ -54,7 +54,6 @@ class GardenCreate(CreateView):
     model = Garden
     fields = ['name', 'location']
     template_name = 'gardens/create.html'
-
     # Assigns logged in user as the garden's owner
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -127,5 +126,4 @@ class DeletePlant(DeleteView):
     model = Plant
     template_name = 'plants/delete.html'
     success_url = '/gardens/'
-
 

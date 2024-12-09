@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<h1>Plant Index</h1>
+{% if plants %}
+{% for plant in plants %}
+<div class="card flex flex-col w-fit m-6">
+    <h2>{{plant.name}}</h2>
+    <p>{{plant.description}}</p>
+    {% if plant.days_since_planted > 0 %}
+    <p><strong>Planted: </strong>{{plant.days_since_planted}} day(s) ago</p>
+    {% else %}
+    <p><strong>Planted: </strong>Today</p>
+    {% endif %}
+    {% if plant.days_until_mature != 0 %}
+    <p><strong>{{plant.days_until_mature}} </strong>days until maturity</p>
+    {% else %}
+    <p><strong>Ready to Harvest!</strong></p>
+    {% endif %}
+</div>
+{% endfor %}
+{% else %}
+<div>
+    <h2>No Plants</h2>
+</div>
+{% endif %}
+{% endblock %}
