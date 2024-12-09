@@ -26,25 +26,17 @@ class Garden(models.Model):
 class Plot(models.Model):
     name = models.CharField(max_length=100)
     garden = models.ForeignKey(Garden, on_delete=models.CASCADE)
-    days_since_watered = models.IntegerField(db_column='daysincewatered',default=0)
+    dayssincewatered = models.IntegerField()
 
     def __str__(self):
         return self.name    
-
     def get_absolute_url(self):
-        return reverse('plot-detail', kwargs={'plot_id': self.id})
-    
-    def increment_days(self):
-        self.days_since_watered += 1
-        self.save()
-   
-
-    
+        return reverse('plot-detail', kwargs={'pk': self.id, 'garden_id': self.garden.id})
 
 class Plant(models.Model):
     name=models.CharField(max_length=100)
-    days_since_planted=models.IntegerField(db_column='days_since_planted',default=0)
-    days_until_mature=models.IntegerField(db_column='days_until_mature')
+    dayssinceplanted=models.IntegerField()
+    daysuntilmature=models.IntegerField()
     description=models.TextField(max_length=250)
     plot=models.ForeignKey(Plot, on_delete=models.CASCADE)
 

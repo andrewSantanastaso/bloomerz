@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="plant-detail-container">
+    <h1>Plant Details</h1>
+    <hr>
+    <h2>{{ plant.name }}</h2>
+    <p><strong>Description:</strong> {{ plant.description }}</p>
+    <p><strong>Days Since Planted:</strong> {{ plant.dayssinceplanted }}</p>
+    <p><strong>Days Until Mature:</strong> {{ plant.daysuntilmature }}</p>
+    <hr>
+    <a href="{% url 'plot-detail' garden_id=plant.plot.garden.id plot_id=plant.plot.id %}" class="btn btn-secondary">Back to Plot Details</a>
+  </div>
+{% endblock %}
