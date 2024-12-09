@@ -1,12 +1,10 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h2>Create a New Plot</h2>
-<div class="flex flex-wrap justify-center items-center border m-auto w-fit h-fit">
-    <form method="post" action="{% url 'plot-create' garden.id %}">
-        {% csrf_token %}
-        {{ form.as_table}}{{form.field.label_tag}}
-        <button type="submit" class="border border-4  border-black rounded-md bg-green-600 shadow-lg mx-32 w-32">Create
-            Plot</button>
-    </form>
-</div>
+  <h2>Create a New Plot</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Create Plot</button>
+  </form>
 {% endblock %}
