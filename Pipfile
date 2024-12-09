@@ -7,13 +7,13 @@ name = "pypi"
 django = "*"
 django-tailwind = "*"
 psycopg2-binary = "*"
-celery = "*"
 redis = "*"
 python-dotenv = "*"
 whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
-
+django-crontab = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 

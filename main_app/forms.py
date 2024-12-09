@@ -1,5 +1,6 @@
 from django import forms
-from .models import Garden, Plot, Plant
+from .models import Garden, Plot, Plant,User
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -16,18 +17,18 @@ class GardenForm(forms.ModelForm):
 class PlotForm(forms.ModelForm):
     class Meta:
         model = Plot
-        fields = ['name', 'dayssincewatered']
+        fields = ['name', 'days_since_watered']
         labels = {
-            'dayssincewatered': 'Days Since Last Watering'
+            'days_since_watered': 'Days Since Last Watering'
         }
         
 class PlantForm(forms.ModelForm):
     class Meta:
         model = Plant
-        fields = ['name', 'dayssinceplanted', 'daysuntilmature', 'description', 'plot']
+        fields = ['name', 'days_since_planted', 'days_until_mature', 'description', 'plot']
         labels = {
-            'dayssinceplanted': 'Days Since Planted',
-            'daysuntilmature': 'Days Until Mature'
+            'days_since_planted': 'Days Since Planted',
+            'days_until_mature': 'Days Until Mature'
         }
 
 

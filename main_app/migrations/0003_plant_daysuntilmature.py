@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='plant',
-            name='daysuntilmature',
+            name='days_until_mature',
             field=models.IntegerField(default=1),
             preserve_default=False,
         ),

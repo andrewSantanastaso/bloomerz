@@ -13,25 +13,16 @@ from __future__ import absolute_import, unicode_literals
 from pathlib import Path
 from dotenv import load_dotenv
 
+
 import os
-from celery import Celery
-from celery.schedules import crontab
+
 import dj_database_url
 
 load_dotenv()
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bloomerz.settings')
 
-app = Celery('bloomerz')
-app.config_from_object('django.conf:settings', namespace='CELERY')
-app.autodiscover_tasks()
 
-app.conf.beat_schedule = {
-    'increment_days': {
-        'task': 'main_app.tasks.increment_days_for_water',
-        'schedule': crontab(minute=0, hour=0),
-    },
-}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,8 +46,11 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     # 'django_browser_reload',
+    
+    'django_crontab',
     'theme',
     'tailwind',
+    
     'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,6 +58,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'celery',
+    'django_celery_beat',
+    
 ]
 
 MIDDLEWARE = [
@@ -154,9 +151,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'garden-index'
@@ -173,10 +170,11 @@ INTERNAL_IPS = [
 
 TAILWIND_APP_NAME = 'theme'
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CRONJOBS = [
+    ('0 * * * *', 'main_app.cron.update_date')
+]
+
+CELERY_BROKER_URL = os.getenv('REDIS_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
-
