@@ -4,7 +4,10 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from .models import Garden, Plot, Plant
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+
+from django.contrib.auth import authenticate, login
+from .forms import PlotForm
+
 # Create your views here.
 
 def signup(request):
@@ -21,7 +24,17 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')  
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'login.html')
 
 class Home(LoginView):
     template_name = 'homepage.html'
