@@ -52,6 +52,15 @@ def plot_index(request):
     
     return render(request, 'plots/index.html', { 'plots': plots})
 
+def plant_index(request):
+    user_gardens = Garden.objects.filter(user=request.user)
+    plants = []
+    for garden in user_gardens:
+        plots = garden.plot_set.all()
+        for plot in plots:
+            plants.extend(plot.plant_set.all())
+    return render(request, 'plants/index.html', {'plants': plants})
+
 class garden_detail(DetailView):
     model = Garden
     template_name = 'gardens/detail.html'
