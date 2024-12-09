@@ -32,12 +32,14 @@
     <div class="unauthenticated-message-container">
         <p class="unauthenticated-message">Create An Account To Start Curating Your Dream Garden!</p>
     </div>
-    {% endif %}
+
 
     <!-- "Start a New Garden" Button -->
+    {% else %}
     <div class="start-garden-center">
         <a href="{% url 'garden-create' %}" class="start-garden-button">Start a New Garden</a>
     </div>
+    {% endif %}
 
     <!-- Garden cards container -->
     <div class="card-container">
