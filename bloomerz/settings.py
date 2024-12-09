@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from __future__ import absolute_import, unicode_literals
 from pathlib import Path
 from dotenv import load_dotenv
+from main_app.management.commands.update_date import Command
 
 import os
 
@@ -45,6 +46,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     # 'django_browser_reload',
+    
     'django_crontab',
     'theme',
     'tailwind',
@@ -169,3 +171,5 @@ TAILWIND_APP_NAME = 'theme'
 CRONJOBS = [
     ('*/1 * * * *', 'main_app.cron.update_date')
 ]
+
+CELERY_BROKER_URL = os.getenv('REDIS_URL')
