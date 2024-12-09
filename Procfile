@@ -1,3 +1,3 @@
 web: gunicorn bloomerz.wsgi
-worker: celery -A bloomerz
+worker: celery -A bloomerz --loglevel
 beat: celery -A bloomerz

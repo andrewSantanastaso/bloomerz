@@ -34,11 +34,7 @@ class Plot(models.Model):
     def get_absolute_url(self):
         return reverse('plot-detail', kwargs={'plot_id': self.id})
     
-    def water(self):
-        self.dayssincewatered = 0
-        date = date.today()
-        self.save()
-    def track_days(self):
+    def increment_days(self):
         self.dayssincewatered += 1
         self.save()
    

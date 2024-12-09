@@ -14,24 +14,14 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 import os
-from celery import Celery
-from celery.schedules import crontab
+
 import dj_database_url
 
 load_dotenv()
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bloomerz.settings')
 
-app = Celery('bloomerz')
-app.config_from_object('django.conf:settings', namespace='CELERY')
-app.autodiscover_tasks()
 
-app.conf.beat_schedule = {
-    'increment_days': {
-        'task': 'main_app.tasks.increment_days_for_water',
-        'schedule': crontab(minute=0, hour=0),
-    },
-}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,6 +45,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     # 'django_browser_reload',
+    'django_crontab',
     'theme',
     'tailwind',
     'main_app',
@@ -64,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 ]
 
 MIDDLEWARE = [
@@ -173,10 +165,7 @@ INTERNAL_IPS = [
 
 TAILWIND_APP_NAME = 'theme'
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
 
+CRONJOBS = [
+    ('*/1 * * * *', 'main_app.cron.update_date')
+]
