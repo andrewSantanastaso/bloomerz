@@ -6,6 +6,7 @@ from .models import Garden, Plot, Plant
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .forms import PlotForm
+
 # Create your views here.
 
 def signup(request):
@@ -104,9 +105,22 @@ def plot_detail(request, plot_id):
     return render(request, template_name, {'plot': plot,'garden_id': plot.garden.id})
 def water_plot(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
-    plot.dayssincewatered = 0
+    plot.days_since_watered = 0
     plot.save()
     return redirect('garden-detail', pk=plot.garden.id)
+def urgent_plots(request):
+    user_gardens = Garden.objects.filter(user=request.user)
+    for garden in user_gardens:
+        plots = garden.plot_set.all()
+    urgent_plots = []
+    
+    for plot in plots:
+        if plot.days_since_watered >= plot.frequency:
+            urgent_plots.append(plot)
+
+    return render(request,'plots/urgent.html', {'urgent_plots': urgent_plots})
+
+   
     
 
 class UpdatePlot(UpdateView):
