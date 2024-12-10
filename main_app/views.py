@@ -8,8 +8,6 @@ from django.contrib.auth import login
 from .forms import PlotForm
 # Create your views here.
 
-
-
 def signup(request):
     error_message = ''
     if request.method == 'POST':
@@ -22,7 +20,7 @@ def signup(request):
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
+    return render(request, 'signup.html', context)
 
 
 
@@ -51,15 +49,6 @@ def plot_index(request):
         plots.extend(garden.plot_set.all())
     
     return render(request, 'plots/index.html', { 'plots': plots})
-
-def plant_index(request):
-    user_gardens = Garden.objects.filter(user=request.user)
-    plants = []
-    for garden in user_gardens:
-        plots = garden.plot_set.all()
-        for plot in plots:
-            plants.extend(plot.plant_set.all())
-    return render(request, 'plants/index.html', {'plants': plants})
 
 class garden_detail(DetailView):
     model = Garden
@@ -115,14 +104,14 @@ def plot_detail(request, plot_id):
     return render(request, template_name, {'plot': plot,'garden_id': plot.garden.id})
 def water_plot(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
-    plot.days_since_watered = 0
+    plot.dayssincewatered = 0
     plot.save()
     return redirect('garden-detail', pk=plot.garden.id)
     
 
 class UpdatePlot(UpdateView):
     model = Plot
-    fields = ['name', 'days_since_watered']
+    fields = ['name', 'dayssincewatered']
     template_name = 'plots/update.html'
 
 class DeletePlot(DeleteView):
@@ -139,7 +128,7 @@ def plot_delete(request, plot_id):
     
 class CreatePlant(CreateView):
     model = Plant
-    fields = ['name', 'days_since_planted', 'days_until_mature', 'description']
+    fields = ['name', 'dayssinceplanted', 'daysuntilmature', 'description']
     template_name = 'plants/create.html'
     # Assigns the plant with the first plot of the logged in user
     def form_valid(self, form):
@@ -156,7 +145,7 @@ class PlantDetail(DetailView):
 
 class UpdatePlant(UpdateView):
     model = Plant
-    fields = ['name', 'days_since_planted', 'days_until_mature', 'description']
+    fields = ['name', 'dayssinceplanted', 'daysuntilmature', 'description']
     template_name = 'plants/update.html'
 
 class DeletePlant(DeleteView):
