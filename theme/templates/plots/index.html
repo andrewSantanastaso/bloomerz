@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<h1>Plot Index</h1>
+
+<div class="grid-cols-3 grid-rows-2">
+
+    {% for plot in plots %}
+    {% if plot %}
+    <div class="bg-green-200 p-4 border border-gray-900">
+        <h2 class="text-xl font-bold">{{ plot.name }}</h2>
+        <h3>{{plot.garden.name}}</h3>
+        <p>{{plot.description}}</p>
+
+    </div>
+    {% else %}
+    <div class="bg-red-200 p-4 border border-gray-900">
+        <h2 class="text-xl font-bold">No Plot</h2>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}

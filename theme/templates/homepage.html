@@ -1,0 +1,256 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloomerz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #004d00;
+            color: white;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav {
+            display: flex;
+            gap: 1em;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        .main-content {
+            text-align: center;
+            padding: 2em;
+        }
+        .main-content h1 {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+        .card {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .add-card {
+            font-size: 2em;
+            color: #004d00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">BLOOMERZ</div>
+        <nav>
+            <a href="#">My Gardens</a>
+            <a href="#">My Plants</a>
+            <a href="#">Sign In</a>
+        </nav>
+    </header>
+    <div class="main-content">
+        <h1>Create an Account to start planning your Garden</h1>
+        <div class="card">Garden 1</div>
+        <div class="card add-card">+</div>
+    </div>
+</body>
+</html>
+=======
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="main-content">
+    <!-- Header shown to all users -->
+    <h1 class="header">Welcome to Bloomerz: Where Your Garden Glow-Up Begins!</h1>
+
+    <!-- Elegant Bloomerz Description -->
+    <div class="description">
+        <p>
+            Bloomerz is a thoughtfully designed garden watering app that nurtures your plants while bringing simplicity
+            and joy to your gardening experience. Whether you’re tending to a blooming balcony oasis, a charming
+            backyard plot, or an expansive greenhouse, Bloomerz empowers you to cultivate and care for your green spaces
+            effortlessly.
+        </p>
+        <ul>
+            <li><strong>Plan and Personalize:</strong> Create and manage gardens, plots, and watering schedules uniquely
+                suited to your plants' needs.</li>
+            <li><strong>Track and Grow:</strong> Log watering activities, monitor plant progress, and celebrate
+                milestones in your garden's journey.</li>
+            <li><strong>Stay Inspired:</strong> Gain insights into best practices and enjoy the serenity of staying
+                connected with nature.</li>
+        </ul>
+        <p>
+            At Bloomerz, we believe that a thriving garden is more than just plants – it’s a reflection of care,
+            balance, and growth. Let Bloomerz help your garden glow and flourish with style and simplicity.
+        </p>
+    </div>
+
+    <!-- Message for unauthenticated users -->
+    {% if not user.is_authenticated %}
+    <div class="unauthenticated-message-container">
+        <p class="unauthenticated-message">Create An Account To Start Curating Your Dream Garden!</p>
+    </div>
+
+
+    <!-- "Start a New Garden" Button -->
+    {% else %}
+    <div class="start-garden-center">
+        <a href="{% url 'garden-create' %}" class="start-garden-button">Start a New Garden</a>
+    </div>
+    {% endif %}
+
+    <!-- Garden cards container -->
+    <div class="card-container">
+        <!-- Check if user is authenticated and if gardens exist -->
+        {% if user.is_authenticated and gardens %}
+        <!-- Dynamic Garden Cards -->
+        {% for garden in gardens %}
+        <div class="card">
+            <a href="{% url 'garden-detail' garden.id %}">
+                <h2>{{ garden.name }}</h2>
+            </a>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<!-- Include Google Fonts -->
+
+
+<style>
+    body {
+        font-family: "Lora", serif;
+        /* Elegant and organic font */
+        margin: 0;
+        padding: 0;
+        background-color: #f7f5f0;
+        /* Light cream */
+        color: #5a5a5a;
+        /* Dark gray */
+    }
+
+    .main-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        /* Full viewport height */
+    }
+
+    .header {
+        text-align: center;
+        font-weight: bold;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #4a4a4a;
+    }
+
+    .description {
+        text-align: center;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 20px 0;
+        max-width: 600px;
+    }
+
+    .description p {
+        margin-bottom: 10px;
+    }
+
+    .description ul {
+        text-align: left;
+        margin: 10px auto;
+        padding: 0 20px;
+        max-width: 500px;
+    }
+
+    .description ul li {
+        margin-bottom: 10px;
+    }
+
+    .unauthenticated-message-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .unauthenticated-message {
+        text-align: center;
+        font-size: 1.2rem;
+        font-style: italic;
+        line-height: 1.6;
+        color: #555;
+        max-width: 600px;
+        margin: 0;
+    }
+
+    .start-garden-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .start-garden-button {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        background-color: #4CAF50;
+        /* Green */
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family: "Lora", serif;
+        /* Matching button font */
+    }
+
+    .start-garden-button:hover {
+        background-color: #45a049;
+        /* Darker green on hover */
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-card {
+        text-align: center;
+        background-color: #d5f5e3;
+    }
+</style>
+{% endblock %}
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
