@@ -53,13 +53,9 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'django_browser_reload',
     'theme',
     'tailwind',
-    
     'django_crontab',
-    
-    
     'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -69,13 +65,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-MIDDLEWARE = [
-    'django_browser_reload.middleware.BrowserReloadMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'celery',
-    'django_celery_beat',
-    
-]
 
 MIDDLEWARE = [
     # 'django_browser_reload.middleware.BrowserReloadMiddleware',
