@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+<<<<<<< HEAD
+
+from pathlib import Path
+=======
 from __future__ import absolute_import, unicode_literals
 from pathlib import Path
 from dotenv import load_dotenv
@@ -23,6 +27,7 @@ load_dotenv()
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bloomerz.settings')
 
 
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +37,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
+SECRET_KEY = 'django-insecure-f32^^)ubxvcaiaqtyk5))^ndjug!smw=+3z*tu5rzlkh#^mqan'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = []
+=======
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -40,17 +53,24 @@ if not 'ON_HEROKU' in os.environ:
 
 
 ALLOWED_HOSTS = ["*"]
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
 
 
 # Application definition
 
 INSTALLED_APPS = [
+<<<<<<< HEAD
+    'django_browser_reload',
+    'theme',
+    'tailwind',
+=======
     # 'django_browser_reload',
     
     'django_crontab',
     'theme',
     'tailwind',
     
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
     'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,6 +78,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
+]
+
+MIDDLEWARE = [
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+=======
     'celery',
     'django_celery_beat',
     
@@ -67,6 +94,7 @@ MIDDLEWARE = [
     # 'django_browser_reload.middleware.BrowserReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -98,6 +126,15 @@ WSGI_APPLICATION = 'bloomerz.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+<<<<<<< HEAD
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bloomerz',
+    }
+}
+=======
 if 'ON_HEROKU' in os.environ:
     DATABASES = {
         'default': dj_database_url.config(
@@ -113,6 +150,7 @@ else:
             'NAME': 'bloomerz',
         }
     }
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
 
 
 
@@ -150,12 +188,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+<<<<<<< HEAD
+STATIC_URL = 'static/'
+LOGIN_URL = ''
+=======
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 LOGIN_URL = 'login'
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
 LOGIN_REDIRECT_URL = 'garden-index'
 LOGOUT_REDIRECT_URL = 'home'
 
@@ -170,6 +213,8 @@ INTERNAL_IPS = [
 
 TAILWIND_APP_NAME = 'theme'
 
+<<<<<<< HEAD
+=======
 
 CRONJOBS = [
     ('0 * * * *', 'main_app.cron.update_date')
@@ -178,3 +223,4 @@ CRONJOBS = [
 CELERY_BROKER_URL = os.getenv('REDIS_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f

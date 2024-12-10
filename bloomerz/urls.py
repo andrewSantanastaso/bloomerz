@@ -20,6 +20,10 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls')),
+<<<<<<< HEAD
+    path("__reload__", include("django_browser_reload.urls")),
+=======
     # path("__reload__", include("django_browser_reload.urls")),
+>>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
     path('accounts/', include('django.contrib.auth.urls')),
 ]
