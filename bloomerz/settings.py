@@ -161,9 +161,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'garden-index'
@@ -185,6 +185,3 @@ CRONJOBS = [
     ('0 * * * *', 'main_app.cron.update_date')
 ]
 
-CELERY_BROKER_URL = os.getenv('REDIS_URL')
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
