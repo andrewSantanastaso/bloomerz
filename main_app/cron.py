@@ -1,4 +1,4 @@
-from .models import Plot
+from .models import Plot, Plant
 
 def update_date():
     print('updating date')

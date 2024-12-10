@@ -10,6 +10,7 @@ urlpatterns = [
     path('gardens/<int:pk>/update/', views.GardenUpdate.as_view(), name='garden-update'),
     path('gardens/<int:pk>/delete/', views.GardenDelete.as_view(), name='garden-delete'),
     path('plots/', views.plot_index, name='plot-index'),
+    path('plots/urgent', views.urgent_plots, name='urgent-plots'),
     path('gardens/<int:garden_id>/plots/create', views.CreatePlot.as_view(), name='plot-create'),
     path('plots/<int:plot_id>', views.plot_detail, name='plot-detail'),
     path('plots/<int:pk>/update', views.UpdatePlot.as_view(), name='plot-update'),
