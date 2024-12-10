@@ -9,13 +9,12 @@
 
     {% for plot in plots %}
     {% if plot %}
-    <a href="{% url 'plot-detail' plot.id %}">
-        <div class="bg-green-200 p-4 border border-gray-900">
-            <h2 class="text-xl font-bold">{{ plot.name }}</h2>
-            <h3><strong>Garden: </strong>{{plot.garden.name}}</h3>
+    <div class="bg-green-200 p-4 border border-gray-900">
+        <h2 class="text-xl font-bold">{{ plot.name }}</h2>
+        <h3>{{plot.garden.name}}</h3>
+        <p>{{plot.description}}</p>
 
-        </div>
-    </a>
+    </div>
     {% else %}
     <div class="bg-red-200 p-4 border border-gray-900">
         <h2 class="text-xl font-bold">No Plot</h2>
