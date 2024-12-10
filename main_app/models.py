@@ -27,6 +27,7 @@ class Plot(models.Model):
     name = models.CharField(max_length=100)
     garden = models.ForeignKey(Garden, on_delete=models.CASCADE)
     days_since_watered = models.IntegerField(db_column='daysincewatered',default=0)
+    frequency = models.IntegerField()
 
     def __str__(self):
         return self.name    
