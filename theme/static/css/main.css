@@ -1,8 +1,6 @@
 nav ul:last-child {
   align-items: flex-end;
 }
-<<<<<<< HEAD
-=======
 
 .btn-delete {
   background-color: #f44336;
@@ -152,4 +150,3 @@ body {
   text-shadow: #4a4a4a;
   border: 1px solid black;
 }
->>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f

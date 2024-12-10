@@ -43,10 +43,7 @@ module.exports = {
     ],
     theme: {
         extend: {},
-<<<<<<< HEAD
-=======
 
->>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
     },
     plugins: [
         /**

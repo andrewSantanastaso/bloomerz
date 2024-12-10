@@ -1,8 +1,5 @@
 {% load static tailwind_tags %}
-<<<<<<< HEAD
-=======
 {% load static %}
->>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	{% tailwind_css %}
-<<<<<<< HEAD
 	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 	<link rel="stylesheet" href="{% static 'assets' %}">
-=======
+	=======
 	<link rel="icon" type="image/" href="{% static 'blossom.png' %}">
 	<link rel="stylesheet" href="{% static 'css/main.css' %}" />
 	<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
@@ -23,50 +19,48 @@
 
 
 
->>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
+
 </head>
 
 <body>
 	<header>
-<<<<<<< HEAD
 		<nav class="bg-green-500 border border-gray-900">
-=======
-		<nav class=" bg-green-500 border border-gray-900">
->>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
 
-			<div class="flex justify-between items-center px-4 py-2">
-				<div>
-					<h1>Bloomerz</h1>
-				</div>
-				<div>
-					{% if user.is_authenticated %}
-					<ul class="flex space-x-4">
-						<li><a href="{% url 'home' %}">Home</a></li><span>|</span>
-						<li><a href="{% url 'garden-index' %}">My Gardens</a></li><span>|</span>
-						<li><a href="{% url 'plot-index'  %}">My Plots</a></li><span>|</span>
-						<li><a href="{% url 'plant-index' %}">My Plants</a></li>
-						<li class="border border-black border-2 p-0 m-0 rounded-md bg-gray-500">
-							<form id="logout-form" method="post" action="{% url 'logout' %}">
-								{% csrf_token %}
-<<<<<<< HEAD
-								<button id="logout-form" type="submit">Log out</button>
-=======
-								<button class="logout-btn" type="submit">Log out</button>
->>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
-							</form>
-						</li>
-						{% else %}
+			<nav class=" bg-green-500 border border-gray-900">
 
-						<ul class="flex space-x-2">
-							<li><a href="{% url 'signup' %}">Sign Up</a></li><span>|</span>
-							<li><a href="{% url 'login' %}">Login</a></li>
 
+				<div class="flex justify-between items-center px-4 py-2">
+					<div>
+						<h1>Bloomerz</h1>
+					</div>
+					<div>
+						{% if user.is_authenticated %}
+						<ul class="flex space-x-4">
+							<li><a href="{% url 'home' %}">Home</a></li><span>|</span>
+							<li><a href="{% url 'garden-index' %}">My Gardens</a></li><span>|</span>
+							<li><a href="{% url 'plot-index'  %}">My Plots</a></li><span>|</span>
+							<li><a href="{% url 'plant-index' %}">My Plants</a></li>
+							<li class="border border-black border-2 p-0 m-0 rounded-md bg-gray-500">
+								<form id="logout-form" method="post" action="{% url 'logout' %}">
+									{% csrf_token %}
+									<button id="logout-form" type="submit">Log out</button>
+
+									<button class="logout-btn" type="submit">Log out</button>
+
+								</form>
+							</li>
+							{% else %}
+
+							<ul class="flex space-x-2">
+								<li><a href="{% url 'signup' %}">Sign Up</a></li><span>|</span>
+								<li><a href="{% url 'login' %}">Login</a></li>
+
+							</ul>
+							{% endif %}
 						</ul>
-						{% endif %}
-					</ul>
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
 	</header>
 	{% block content %}
 	{% endblock %}
