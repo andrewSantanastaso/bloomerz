@@ -193,9 +193,9 @@ STATIC_URL = 'static/'
 LOGIN_URL = ''
 =======
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 LOGIN_URL = 'login'
 >>>>>>> 1f361375759c1105842deef4a7c9c88b7b8e1a9f
