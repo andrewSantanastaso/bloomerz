@@ -26,7 +26,10 @@ class Garden(models.Model):
 class Plot(models.Model):
     name = models.CharField(max_length=100)
     garden = models.ForeignKey(Garden, on_delete=models.CASCADE)
-    dayssincewatered = models.IntegerField()
+
+    days_since_watered = models.IntegerField(db_column='daysincewatered',default=0)
+    frequency = models.IntegerField()
+
 
     def __str__(self):
         return self.name    
@@ -35,8 +38,8 @@ class Plot(models.Model):
 
 class Plant(models.Model):
     name=models.CharField(max_length=100)
-    dayssinceplanted=models.IntegerField()
-    daysuntilmature=models.IntegerField()
+    days_since_planted=models.IntegerField()
+    days_until_mature=models.IntegerField()
     description=models.TextField(max_length=250)
     plot=models.ForeignKey(Plot, on_delete=models.CASCADE)
 
