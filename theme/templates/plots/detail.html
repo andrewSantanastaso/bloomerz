@@ -1,8 +1,37 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
-<h1>{{plot.name}}</h1>
+<h1>{{ plot.name }}</h1>
+
+{% if plot.plant_set.all %}
+    <ul>
+        {% for plant in plot.plant_set.all %}
+            <li>
+                <strong>{{ plant.name }}</strong> 
+                - Planted {{ plant.days_since_planted }} days ago 
+                - Matures in {{ plant.days_until_mature }} days
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No plants in this plot yet.</p>
+{% endif %}
+
+{% if not show_form %}
+    <a href="?add_plant=true" class="btn btn-success">Add Plant</a>
+{% endif %}
+
+{% if show_form %}
+<h2>Add a New Plant</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Confirm</button>
+</form>
+{% endif %}
+
 <a href="{% url 'plot-update' plot.id %}">Update Plot</a>
+
 {% endblock %}

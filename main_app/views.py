@@ -96,14 +96,28 @@ class CreatePlot(CreateView):
 
 def plot_detail(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
+    
+    show_form = request.GET.get('add_plant') == 'true'
+    
+    if request.method == 'POST':
+        form = PlantForm(request.POST)
+        if form.is_valid():
+            plant = form.save(commit=False)
+            plant.plot = plot
+            plant.save()
+            return redirect('plot-detail', plot_id=plot.id)
+    else:
+        form = PlantForm() if show_form else None
 
     template_name = 'plots/detail.html'
-    return render(request, template_name, {'plot': plot,'garden_id': plot.garden.id})
+    return render(request, template_name, {'plot': plot, 'form': form, 'garden_id': plot.garden.id, 'show_form': show_form})
+
 def water_plot(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     plot.days_since_watered = 0
     plot.save()
     return redirect('garden-detail', pk=plot.garden.id)
+
 def urgent_plots(request):
     user_gardens = Garden.objects.filter(user=request.user)
     for garden in user_gardens:
@@ -114,8 +128,7 @@ def urgent_plots(request):
         if plot.days_since_watered >= plot.frequency:
             urgent_plots.append(plot)
 
-    return render(request,'plots/urgent.html', {'urgent_plots': urgent_plots})
-   
+    return render(request, 'plots/urgent.html', {'urgent_plots': urgent_plots})
 
 class UpdatePlot(UpdateView):
     model = Plot
@@ -131,7 +144,6 @@ def plot_delete(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     plot.delete()
     return redirect('garden-detail', pk=plot.garden.id)
-
     
 class CreatePlant(CreateView):
     model = Plant
