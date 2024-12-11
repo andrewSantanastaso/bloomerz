@@ -183,6 +183,6 @@ TAILWIND_APP_NAME = 'theme'
 
 
 CRONJOBS = [
-    ('0 * * * *', 'main_app.cron.update_date')
+    ('0 0 * * *', 'main_app.cron.update_date')
 ]
 
