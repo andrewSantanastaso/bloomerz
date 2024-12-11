@@ -23,6 +23,7 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+
 def home(request):
     return render(request, 'homepage.html')
     

@@ -167,6 +167,24 @@ body {
 img {
   max-width: 100%;
   max-height: 30px;
+}
 
-  border-radius: 5px;
+.plot-btn {
+  max-height: 20x;
+  font-size: small;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.garden-card {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.garden-container {
+  gap: 10px;
 }
