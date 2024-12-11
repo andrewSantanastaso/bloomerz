@@ -11,12 +11,12 @@
             <div
                 class="bg-green-200  border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col items-center">
                 <h2 class="text-xl font-bold">{{ plot.name }}</h2>
-                <h3>Days Since Last Watering: {{plot.days_since_watered}}</h3>
-                <p>Total Plants:{{plot.plant_set.count}}</p>
-                <div>
-                    <a class="btn-edit" href="{% url 'plot-update' plot.id %}">Edit</a>
-                    <a class="btn-delete" href="{% url 'plot-delete' plot.id %}">Delete</a>
-                    <a class="btn-water" href="{% url 'plot-water' plot.id %}">Water Plot</a>
+                <h3><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
+                <p><strong>Total Plants:</strong>{{plot.plant_set.count}}</p>
+                <div class="flex flex-wrap justify-center m-2">
+                    <a class="btn-edit plot-btn w-0.5" href="{% url 'plot-update' plot.id %}">Edit</a>
+                    <a class="btn-delete plot-btn w-0.5" href="{% url 'plot-delete' plot.id %}">Delete</a>
+                    <a class="btn-water plot-btn w-full" href="{% url 'plot-water' plot.id %}">Water Plot</a>
                 </div>
             </div>
         </a>
@@ -24,7 +24,9 @@
 
     {% endfor %}
 </div>
-<a href="{% url 'plot-create' garden.id%}">
-    <p class="text-xl font-bold flex justify-center">Add a Plot</p>
-</a>
+<div class="flex justify-center mt-44">
+    <a href="{% url 'plot-create' garden.id%}">
+        <p class=" bg-green-600 text-xl font-bold flex justify-center border w-fit ">Add a Plot</p>
+    </a>
+</div>
 {% endblock %}
