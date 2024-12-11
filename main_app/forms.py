@@ -15,13 +15,14 @@ class GardenForm(forms.ModelForm):
     class Meta:
         model = Garden
         fields = ['name', 'location', 'user']
-        
+
 class PlotForm(forms.ModelForm):
     class Meta:
         model = Plot
         fields = ['name', 'days_since_watered', 'frequency']
         labels = {
-            'days_since_watered': 'Days Since Last Watering'
+            'days_since_watered': 'Days Since Last Watering',
+            'frequency': 'Watering Frequency'
         }
         
 class PlantForm(forms.ModelForm):

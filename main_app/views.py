@@ -119,7 +119,7 @@ def urgent_plots(request):
 
 class UpdatePlot(UpdateView):
     model = Plot
-    fields = ['name', 'days_since_watered']
+    fields = ['name', 'days_since_watered', 'frequency']
     template_name = 'plots/update.html'
 
 class DeletePlot(DeleteView):
