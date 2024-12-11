@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView
 from .models import Garden, Plot, Plant
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from .forms import PlotForm
+from .forms import PlotForm, GardenForm, PlantForm
 
 # Create your views here.
 
@@ -22,7 +22,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
-
 
 
 def home(request):
@@ -66,15 +65,13 @@ class GardenCreate(CreateView):
 
 class GardenUpdate(UpdateView):
     model = Garden
-    fields = ['name', 'location']
+    form_class = GardenForm
     template_name = 'gardens/update.html'
 
 class GardenDelete(DeleteView):
     model = Garden
     template_name = 'gardens/delete.html'
     success_url = '/gardens/'
-
-
 
 class CreatePlot(CreateView):
     model = Plot
@@ -93,21 +90,35 @@ class CreatePlot(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        garden_id = self.kwargs.get('garden_id')  # Corrected this line
+        garden_id = self.kwargs.get('garden_id')
         context['garden'] = get_object_or_404(Garden, pk=garden_id)
         return context
     
 
 def plot_detail(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
+    
+    show_form = request.GET.get('add_plant') == 'true'
+    
+    if request.method == 'POST':
+        form = PlantForm(request.POST)
+        if form.is_valid():
+            plant = form.save(commit=False)
+            plant.plot = plot
+            plant.save()
+            return redirect('plot-detail', plot_id=plot.id)
+    else:
+        form = PlantForm() if show_form else None
 
     template_name = 'plots/detail.html'
-    return render(request, template_name, {'plot': plot,'garden_id': plot.garden.id})
+    return render(request, template_name, {'plot': plot, 'form': form, 'garden_id': plot.garden.id, 'show_form': show_form})
+
 def water_plot(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     plot.days_since_watered = 0
     plot.save()
     return redirect('garden-detail', pk=plot.garden.id)
+
 def urgent_plots(request):
     user_gardens = Garden.objects.filter(user=request.user)
     for garden in user_gardens:
@@ -118,14 +129,11 @@ def urgent_plots(request):
         if plot.days_since_watered >= plot.frequency:
             urgent_plots.append(plot)
 
-    return render(request,'plots/urgent.html', {'urgent_plots': urgent_plots})
-
-   
-    
+    return render(request, 'plots/urgent.html', {'urgent_plots': urgent_plots})
 
 class UpdatePlot(UpdateView):
     model = Plot
-    fields = ['name', 'dayssincewatered']
+    fields = ['name', 'days_since_watered', 'frequency']
     template_name = 'plots/update.html'
 
 class DeletePlot(DeleteView):
@@ -137,8 +145,6 @@ def plot_delete(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     plot.delete()
     return redirect('garden-detail', pk=plot.garden.id)
-
-
     
 class CreatePlant(CreateView):
     model = Plant
@@ -159,7 +165,7 @@ class PlantDetail(DetailView):
 
 class UpdatePlant(UpdateView):
     model = Plant
-    fields = ['name', 'dayssinceplanted', 'daysuntilmature', 'description']
+    form_class = PlantForm
     template_name = 'plants/update.html'
 
 class DeletePlant(DeleteView):
