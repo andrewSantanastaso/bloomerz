@@ -4,4 +4,5 @@
 
 {% block content %}
 <h1>{{plot.name}}</h1>
+<a href="{% url 'plot-update' plot.id %}">Update Plot</a>
 {% endblock %}

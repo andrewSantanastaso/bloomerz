@@ -15,6 +15,7 @@ class GardenForm(forms.ModelForm):
     class Meta:
         model = Garden
         fields = ['name', 'location', 'user']
+        
 class PlotForm(forms.ModelForm):
     class Meta:
         model = Plot

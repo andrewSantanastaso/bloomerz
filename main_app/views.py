@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView
 from .models import Garden, Plot, Plant
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from .forms import PlotForm
+from .forms import PlotForm, GardenForm, PlantForm
 
 # Create your views here.
 
@@ -21,9 +21,7 @@ def signup(request):
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
-    return render(request, 'signup.html', context)
-
-
+    return render(request, 'registration/signup.html', context)
 
 def home(request):
     return render(request, 'homepage.html')
@@ -66,15 +64,13 @@ class GardenCreate(CreateView):
 
 class GardenUpdate(UpdateView):
     model = Garden
-    fields = ['name', 'location']
+    form_class = GardenForm
     template_name = 'gardens/update.html'
 
 class GardenDelete(DeleteView):
     model = Garden
     template_name = 'gardens/delete.html'
     success_url = '/gardens/'
-
-
 
 class CreatePlot(CreateView):
     model = Plot
@@ -93,7 +89,7 @@ class CreatePlot(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        garden_id = self.kwargs.get('garden_id')  # Corrected this line
+        garden_id = self.kwargs.get('garden_id')
         context['garden'] = get_object_or_404(Garden, pk=garden_id)
         return context
     
@@ -119,13 +115,11 @@ def urgent_plots(request):
             urgent_plots.append(plot)
 
     return render(request,'plots/urgent.html', {'urgent_plots': urgent_plots})
-
    
-    
 
 class UpdatePlot(UpdateView):
     model = Plot
-    fields = ['name', 'dayssincewatered']
+    fields = ['name', 'days_since_watered']
     template_name = 'plots/update.html'
 
 class DeletePlot(DeleteView):
@@ -137,7 +131,6 @@ def plot_delete(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     plot.delete()
     return redirect('garden-detail', pk=plot.garden.id)
-
 
     
 class CreatePlant(CreateView):
@@ -159,7 +152,7 @@ class PlantDetail(DetailView):
 
 class UpdatePlant(UpdateView):
     model = Plant
-    fields = ['name', 'dayssinceplanted', 'daysuntilmature', 'description']
+    form_class = PlantForm
     template_name = 'plants/update.html'
 
 class DeletePlant(DeleteView):

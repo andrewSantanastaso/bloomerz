@@ -11,6 +11,7 @@
             <h3>Total Plots: {{garden.plot_set.count}}</h3>
 
             <a href="{% url 'garden-detail' garden.id %}">View Garden</a>
+            <a href="{% url 'garden-update' garden.id %}">Update Garden</a>
         </div>
         {% endfor %}
     </div>
