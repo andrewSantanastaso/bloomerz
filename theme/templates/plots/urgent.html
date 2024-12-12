@@ -2,24 +2,50 @@
 {% load static %}
 
 {% block content %}
-<div class="grid grid-cols-flow grid-flow-row gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-14">
-    {% for plot in urgent_plots %}
-    <div class="flex ">
-        <a href="{% url 'plot-detail' plot.id %}">
-            <div
-                class="bg-green-200  border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col items-center">
-                <h2 class="text-xl font-bold">{{ plot.name }}</h2>
-                <p><strong>Garden:</strong>{{plot.garden.name}} </p>
-                <h3><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
-                <p><strong>Total Plants:</strong>{{plot.plant_set.count}}</p>
+<div class="grid grid-cols-flow grid-flow-row gap-8 mx-14">
+    <div class="card-container">
+        {% for plot in urgent_plots %}
+        <div class="plot-card relative" style="margin-top: 50px;">
+            <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col p-4">
+                <!-- Dropdown button with added class 'dropdown-button' -->
+                <div class="dropdown-button">
+                    <div x-data="{dropdownOpen: false}">
+                        <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="bg-black"
+                                viewBox="-10 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    d="M12 6h.01M12 12h.01M12 18h.01" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown content with added class 'dropdown-menu' -->
+                        <div x-show="dropdownOpen" class="dropdown-menu">
+                            <div class="flex flex-wrap justify-center m-2">
+                                <a class="plot-btn btn-edit plot-btn w-0.5"
+                                    href="{% url 'plot-update' plot.id %}">Edit</a>
+                                <a class="plot-btn btn-delete plot-btn w-0.5"
+                                    href="{% url 'plot-delete' plot.id %}">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'plot-detail' plot.id %}">
+                    <h2 class="text-xl font-bold">{{ plot.name }}</h2>
+                    <h3><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
+                    <p><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
+                </a>
                 <div class="flex flex-wrap justify-center m-2">
-                    <a class="btn-edit plot-btn w-0.5" href="{% url 'plot-update' plot.id %}">Edit</a>
-                    <a class="btn-delete plot-btn w-0.5" href="{% url 'plot-delete' plot.id %}">Delete</a>
-                    <a class="btn-water plot-btn w-full" href="{% url 'plot-water' plot.id %}">Water Plot</a>
+                    <a class="plot-btn btn-water plot-btn w-full" href="{% url 'plot-water' plot.id %}">Water Plot</a>
                 </div>
             </div>
-        </a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 {% endblock %}

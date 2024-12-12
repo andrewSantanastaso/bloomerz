@@ -23,14 +23,12 @@
 	<header>
 
 
-		<nav class=" bg-green-500 border border-gray-900 w-screen">
+		<nav class=" bg-green-500 border border-gray-900 min-w-full">
 
 
 			<div class="flex justify-between items-center px-4 py-2 max-h-1">
 				<div>
-					<a href="{% url 'home' %}">
-						<h1>Bloomerz</h1>
-				</a>
+					<h1>Bloomerz</h1>
 				</div>
 				<div>
 					{% if user.is_authenticated %}
@@ -41,7 +39,7 @@
 						<li><a href="{% url 'plant-index' %}">My Plants</a></li>
 
 						<li><a href="{% url 'urgent-plots' %}"><img src="{% static 'water_drop.png' %}" alt="water_drop"
-									class="h-0"></a>
+									class="water-drop"></a>
 							{% if urgent_plots_count > 0 %}
 							<span class="notification-badge">{{ urgent_plots_count }}</span>
 							{% endif %}

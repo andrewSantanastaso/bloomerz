@@ -13,6 +13,7 @@
 
             <a href="{% url 'garden-detail' garden.id %}">View Garden</a>
             <a href="{% url 'garden-update' garden.id %}">Update Garden</a>
+            <a href="{% url 'garden-delete' garden.id %}">Delete Garden</a>
         </div>
         {% endfor %}
     </div>
@@ -28,6 +29,6 @@
 
 
 
-</div>
+    </div>
 
-{% endblock %}
+    {% endblock %}
