@@ -3,12 +3,11 @@
 
 {% block content %}
 <h1 class="flex justify-center m-auto mb-6"><strong>Garden: </strong>{{garden.name}}</h1>
-<div class="grid grid-cols-flow grid-flow-row gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-14">
+<div class="grid grid-cols-flow grid-flow-row gap-4 mx-14 mb-10">
     <div class="card-container">
         {% for plot in garden.plot_set.all %}
         <div class="plot-card relative">
             <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col">
-                <!-- Dropdown button with added class 'dropdown-button' -->
                 <div class="dropdown-button">
                     <div x-data="{dropdownOpen: false}">
                         <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
@@ -45,12 +44,12 @@
 </div>
 
 
-<div class="flex justify-center mt-44 add-card">
-    <a href="{% url 'plot-create' garden.id%}" class="add-card">
+<div class="flex justify-center mt-auto add-card">
+    <a href="{% url 'plot-create' garden.id%}" class="add-card" style="margin-top: 20px">
         <p class="bg-green-600 text-xl font-bold flex justify-center  w-fit">Add a Plot</p>
     </a>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 {% endblock %}
