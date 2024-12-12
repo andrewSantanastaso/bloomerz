@@ -174,6 +174,6 @@ class DeletePlant(DeleteView):
     success_url = '/gardens/'
 
 class SignIn(LoginView):
-    template_name = 'login.html'
+    template_name = 'registration/login.html'
     redirect_authenticated_user = True
     success_url = '/gardens/'
