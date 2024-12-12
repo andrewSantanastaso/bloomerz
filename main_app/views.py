@@ -171,7 +171,6 @@ class UpdatePlant(UpdateView):
 class DeletePlant(DeleteView):
     model = Plant
     template_name = 'plants/delete.html'
-    success_url = '/gardens/'
 
 class SignIn(LoginView):
     template_name = 'registration/login.html'
