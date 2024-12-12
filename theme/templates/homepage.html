@@ -36,8 +36,8 @@
 
     <!-- "Start a New Garden" Button -->
     {% else %}
-    <div class="start-garden-center">
-        <a href="{% url 'garden-create' %}" class="start-garden-button">Start a New Garden</a>
+    <div class="add-card">
+        <a href="{% url 'garden-create' %}" class="start-garden-button add-card">Start a New Garden</a>
     </div>
     {% endif %}
 
@@ -171,11 +171,6 @@
         background-color: #fff;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .add-card {
-        text-align: center;
-        background-color: #d5f5e3;
     }
 </style>
 {% endblock %}
