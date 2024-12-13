@@ -67,13 +67,14 @@ nav ul:last-child {
 
 body {
   font-family: "Lora", serif;
-  /* Elegant and organic font */
   margin: 0;
   padding: 0;
   background-color: beige;
-  /* Light cream */
   color: #5a5a5a;
-  /* Dark gray */
+  min-height: 100vh; /* Ensure body takes full height of the screen */
+  width: 100%;
+  overflow-y: auto; /* Allow vertical scrolling */
+  overflow-x: hidden;
 }
 
 .main-content {
@@ -82,8 +83,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  /* Full viewport height */
+  flex-grow: 1; /* Allow the content to grow and fill the remaining space */
+  min-height: 100vh; /* Ensure it takes at least full screen height */
+  overflow: auto; /* Allow scrolling if content exceeds screen */
 }
 
 .header {
@@ -105,7 +107,6 @@ body {
   text-align: center;
   font-size: 1.1rem;
   line-height: 1.6;
-  margin: 20px 0;
   max-width: 600px;
 }
 
@@ -210,9 +211,9 @@ body {
   max-height: fit-content;
 }
 
-img {
+.water-drop {
   max-width: 100%;
-  max-height: 30px;
+  max-height: 20px;
 }
 
 .plot-btn {
@@ -425,34 +426,38 @@ nav a h1 {
   display: block;
 }
 .image-container {
-  text-align: center; 
-  margin: 20px 0; 
+  text-align: center;
+  margin: 20px 0;
 }
 
 .top-image {
-  display: inline-block; 
-  max-width: 100%; 
-  height: auto; 
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
 }
 
-
-
 .background-container {
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; 
-  height: 100vh; 
-  background-image: url("../static/flowers.png"); 
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-  z-index: -1; 
+  width: 100%;
+  height: 100vh;
+  background-image: url("../static/flowers.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1; /* Keep it in the background */
 }
 
 .main-content {
-  position: relative;
-  z-index: 1; 
-  color: #fff; 
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); 
+  /* position: relative;
+  z-index: 1; */
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.footer-image {
+  width: auto;
+  height: 150px;
+  object-fit: cover;
 }
