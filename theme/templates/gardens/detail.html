@@ -5,6 +5,7 @@
 <h1 class="flex justify-center m-auto mb-6"><strong>Garden: </strong>{{garden.name}}</h1>
 <div class="grid grid-cols-flow grid-flow-row gap-4 mx-14 mb-10">
     <div class="card-container">
+        {% if garden.plot_set.count > 0 %}
         {% for plot in garden.plot_set.all %}
         <div class="plot-card relative">
             <div class="plot-card bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col">
@@ -40,16 +41,22 @@
             </div>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="flex justify-center mt-20">
+            <div class="p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-2xl font-bold mb-2" style="text-align: center;">No Plots Available</h2>
+                <p class="text-gray-700">Start by adding a new plot to this garden!</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
-
 
 <div class="flex justify-center mt-auto add-card">
     <a href="{% url 'plot-create' garden.id%}" class="add-card" style="margin-top: 20px">
         <p class="bg-green-600 text-xl font-bold flex justify-center  w-fit">Add a Plot</p>
     </a>
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 {% endblock %}

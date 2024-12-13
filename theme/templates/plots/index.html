@@ -43,10 +43,16 @@
             </div>
         </div>
     </div>
-    {% endif %}
-    {% endfor %}
-</div>
+    {% else %}
+    <div class="flex justify-center mt-20">
+        <div class=" p-6 rounded-lg shadow-lg text-center">
+            <h2 class="text-2xl font-bold mb-2" style="text-align: center;">No Plots Available</h2>
+            <p class="text-gray-700">Start by adding a new plot to one of your gardens!</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
-{% endblock %}
+    {% endblock %}

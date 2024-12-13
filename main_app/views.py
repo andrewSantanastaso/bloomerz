@@ -117,18 +117,21 @@ def water_plot(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     plot.days_since_watered = 0
     plot.save()
-    return redirect('garden-detail', pk=plot.garden.id)
+    return redirect(request.META['HTTP_REFERER'])
 
 def urgent_plots(request):
     user_gardens = Garden.objects.filter(user=request.user)
+    urgent_plots = []
     for garden in user_gardens:
         plots = garden.plot_set.all()
-    urgent_plots = []
+        
     
-    for plot in plots:
-        if plot.days_since_watered >= plot.frequency:
-            urgent_plots.append(plot)
-
+    
+        for plot in plots:
+            
+            if plot.days_since_watered >= plot.frequency:
+                urgent_plots.append(plot)
+    
     return render(request, 'plots/urgent.html', {'urgent_plots': urgent_plots})
 
 class UpdatePlot(UpdateView):
