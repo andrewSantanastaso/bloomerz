@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
 <h1 class="header">My Plots</h1>
 
@@ -10,8 +9,11 @@
     {% for plot in plots %}
     {% if plot %}
     <div class="plot-card relative grid grid-cols-flow grid-rows-flow max-w-100 max-h-100 mt-5">
+
+
         <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col"
             style="border-radius: 0.375rem;">
+
 
             <div class="dropdown-button">
                 <div x-data="{dropdownOpen: false}">

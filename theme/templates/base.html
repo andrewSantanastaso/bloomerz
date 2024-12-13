@@ -19,7 +19,8 @@
 
 </head>
 
-<body>
+<body style="background-image: url('{% static " Garden.png" %}');">
+
 	<header>
 
 
@@ -28,7 +29,9 @@
 
 			<div class="flex justify-between items-center px-4 py-2 max-h-1">
 				<div>
-					<h1>Bloomerz</h1>
+					<a href="{% url 'home' %}">
+						<h1>Bloomerz</h1>
+					</a>
 				</div>
 				<div>
 					{% if user.is_authenticated %}
@@ -65,7 +68,10 @@
 			</div>
 		</nav>
 	</header>
+
+
 	{% block content %}
+
 	{% endblock %}
 
 </body>
