@@ -4,22 +4,17 @@
 <html lang="en">
 
 <head>
-	<title>Bloomerz</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5, user-scalable=yes">
+	<title>Bloomerz</title>
 	{% tailwind_css %}
 	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 	<link rel="icon" type="image/" href="{% static 'blossom.png' %}">
 	<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
-
-
-
-
-
 </head>
 
-<body>
+
+<body class="min-h-screen overflow-auto">
 	<header>
 
 
@@ -39,7 +34,7 @@
 						<li><a href="{% url 'plant-index' %}">My Plants</a></li>
 
 						<li><a href="{% url 'urgent-plots' %}"><img src="{% static 'water_drop.png' %}" alt="water_drop"
-									class="water"></a>
+									class="water_drop" style="max-width: 30px;"></a>
 							{% if urgent_plots_count > 0 %}
 							<span class="notification-badge">{{ urgent_plots_count }}</span>
 							{% endif %}
@@ -67,7 +62,12 @@
 	</header>
 	{% block content %}
 	{% endblock %}
+	<footer class="fixed bottom-0 ">
+		{% block footer %}
+		{% endblock %}
+	</footer>
 
 </body>
+
 
 </html>
