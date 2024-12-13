@@ -424,3 +424,35 @@ nav a h1 {
 .garden-card .dropdown-menu[x-show="dropdownOpen"] {
   display: block;
 }
+.image-container {
+  text-align: center; 
+  margin: 20px 0; 
+}
+
+.top-image {
+  display: inline-block; 
+  max-width: 100%; 
+  height: auto; 
+}
+
+
+
+.background-container {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100vh; 
+  background-image: url("../static/flowers.png"); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  z-index: -1; 
+}
+
+.main-content {
+  position: relative;
+  z-index: 1; 
+  color: #fff; 
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); 
+}
