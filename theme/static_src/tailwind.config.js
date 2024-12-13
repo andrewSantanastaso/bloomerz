@@ -14,6 +14,7 @@ module.exports = {
         /*  Templates within theme app (<tailwind_app_name>/templates), e.g. base.html. */
         '../templates/**/*.html',
 
+
         /*
          * Main templates directory of the project (BASE_DIR/templates).
          * Adjust the following line to match your project structure.
@@ -43,6 +44,10 @@ module.exports = {
     ],
     theme: {
         extend: {
+            backgroundImage: theme => ({
+                'hero-pattern': "url('/static/Garden.png')",
+
+            }),
 
         },
 
