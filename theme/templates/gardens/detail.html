@@ -8,7 +8,8 @@
         {% if garden.plot_set.count > 0 %}
         {% for plot in garden.plot_set.all %}
         <div class="plot-card relative">
-            <div class="plot-card bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col">
+            <div
+                class="plot-card bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col rounded-md">
                 <div class="dropdown-button">
                     <div x-data="{dropdownOpen: false}">
                         <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">

@@ -5,11 +5,11 @@
 
 <div class="container mx-auto">
     <h1 class="header">My Gardens</h1>
-    <div class="garden-container flex flex-wrap justify-center gap-6">
+    <div class="garden-container flex flex-wrap justify-center gap-6 rounded-lg">
         {% for garden in gardens %}
-        <div class="garden-card flex justify-center">
-            <div
-                class="bg-green-200 p-6 border border-gray-900 rounded-lg shadow-lg w-full max-w-xl relative flex flex-col items-center">
+        <div class="garden-card flex justify-center overflow-hidden">
+            <div class="bg-green-200 p-6 border border-gray-900 rounded-lg shadow-lg w-full max-w-xl relative flex flex-col items-center overflow-hidden"
+                style="border-radius: 0.375rem;">
                 <div class="dropdown-button">
                     <div x-data="{dropdownOpen: false}" class="relative">
                         <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
