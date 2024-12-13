@@ -2,29 +2,39 @@
 {% load static %}
 
 {% block content %}
+<h1 class="header">My Plants</h1>
 
-
-<h1>Plant Index</h1>
 {% if plants %}
-{% for plant in plants %}
-<div class="card flex flex-col w-fit m-6">
-    <h2>{{plant.name}}</h2>
-    <p>{{plant.description}}</p>
-    {% if plant.days_since_planted > 0 %}
-    <p><strong>Planted: </strong>{{plant.days_since_planted}} day(s) ago</p>
-    {% else %}
-    <p><strong>Planted: </strong>Today</p>
-    {% endif %}
-    {% if plant.days_until_mature != 0 %}
-    <p><strong>{{plant.days_until_mature}} </strong>days until maturity</p>
-    {% else %}
-    <p><strong>Ready to Harvest!</strong></p>
-    {% endif %}
+<div class="grid grid-cols-1 gap-4 mx-14">
+    {% for plant in plants %}
+    <div class="bg-green-200 border border-gray-900 p-6 flex flex-col items-center w-full rounded-md">
+        <h2 class="text-xl font-bold">{{ plant.name }}</h2>
+
+        <p class="mt-2 text-center">{{ plant.description }}</p>
+
+        {% if plant.days_since_planted > 0 %}
+        <p class="mt-2"><strong>Planted:</strong> {{ plant.days_since_planted }} day(s) ago</p>
+        {% else %}
+        <p class="mt-2"><strong>Planted:</strong> Today</p>
+        {% endif %}
+
+        {% if plant.days_until_mature != 0 %}
+        <p><strong>Days Until Maturity:</strong> {{ plant.days_until_mature }}</p>
+        {% else %}
+        <p class="text-red-500 font-bold"><strong>Ready to Harvest!</strong></p>
+        {% endif %}
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% else %}
-<div>
-    <h2>No Plants</h2>
+
+<div class="flex justify-center mt-20">
+    <div class=" p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-2xl font-bold mb-2" style="text-align: center;">No Plants Available</h2>
+        <p class="text-gray-700">Start by adding a new plant to one of your plots!</p>
+    </div>
 </div>
 {% endif %}
+
+
 {% endblock %}

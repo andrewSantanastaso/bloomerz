@@ -3,31 +3,45 @@
 
 {% block content %}
 
-<div class="container mx-auto ">
-    <h1 class="text-3xl font-bold">My Gardens</h1>
-    <div class="flex border gap-2">
+<div class="container mx-auto">
+    <h1 class="header">My Gardens</h1>
+    <div class="garden-container flex flex-wrap justify-center gap-6">
         {% for garden in gardens %}
-        <div class="bg-green-200 p-4 border border-gray-900 w-full  ">
-            <h2 class="text-xl font-bold">{{ garden.name }}</h2>
-            <h3>Total Plots: {{garden.plot_set.count}}</h3>
-
-            <a href="{% url 'garden-detail' garden.id %}">View Garden</a>
-            <a href="{% url 'garden-update' garden.id %}">Update Garden</a>
+        <div class="garden-card flex justify-center">
+            <div
+                class="bg-green-200 p-6 border border-gray-900 rounded-lg shadow-lg w-full max-w-xl relative flex flex-col items-center">
+                <div class="dropdown-button">
+                    <div x-data="{dropdownOpen: false}" class="relative">
+                        <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white box-border" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="bg-black"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                    d="M12 6h.01M12 12h.01M12 18h.01" />
+                            </svg>
+                        </button>
+                        <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="dropdown-menu">
+                            <div class="bg-white shadow-md rounded-md py-2 px-4">
+                                <a href="{% url 'garden-update' garden.id %}" class="btn-edit">Edit</a>
+                                <a href="{% url 'garden-delete' garden.id %}" class="btn-delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="text-2xl font-bold mb-2">{{ garden.name }}</h2>
+                <p>Total Plots: {{ garden.plot_set.count }}</p>
+                <a href="{% url 'garden-detail' garden.id %}" class="underline">View Garden</a>
+            </div>
         </div>
         {% endfor %}
     </div>
-    <div class="flex border">
-
-
-        <a href="{% url 'garden-create' %}" class="w-full">
-            <div class="bg-green-200 p-4 border border-gray-900 w-full">
-                <h2 class="text-xl font-bold flex justify-center">Add a Garden</h2>
+    <div class="flex justify-center mt-8 add-card">
+        <a href="{% url 'garden-create' %}" class="add-card">
+            <div class=" border-gray-900 rounded-lg shadow-lg w-full max-w-xl text-center">
+                <h2 class="text-2xl font-bold">Add a Garden</h2>
             </div>
         </a>
-
-
-
-
+    </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 {% endblock %}

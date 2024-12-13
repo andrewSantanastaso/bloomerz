@@ -36,8 +36,8 @@
 
     <!-- "Start a New Garden" Button -->
     {% else %}
-    <div class="start-garden-center">
-        <a href="{% url 'garden-create' %}" class="start-garden-button">Start a New Garden</a>
+    <div class="add-card">
+        <a href="{% url 'garden-create' %}" class="start-garden-button add-card">Start a New Garden</a>
     </div>
     {% endif %}
 
@@ -60,13 +60,13 @@
 <!-- Include Google Fonts -->
 
 
-<style>
+<!-- <style>
     body {
         font-family: "Lora", serif;
         /* Elegant and organic font */
         margin: 0;
         padding: 0;
-        background-color: #f7f5f0;
+        background-color: beige;
         /* Light cream */
         color: #5a5a5a;
         /* Dark gray */
@@ -172,10 +172,5 @@
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
-    .add-card {
-        text-align: center;
-        background-color: #d5f5e3;
-    }
-</style>
+</style> -->
 {% endblock %}
