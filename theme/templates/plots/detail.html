@@ -2,22 +2,24 @@
 {% load static %}
 
 {% block content %}
-
-<h1 class="flex justify-center m-auto mb-6 text-3xl font-extrabold">{{ plot.name }}</h1>
+<h1 class="flex justify-center m-auto mb-6 text-4xl font-extrabold text-green-700">{{ plot.name }}</h1>
 
 <div class="grid grid-cols-flow grid-flow-row gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-14">
     {% if plot.plant_set.all %}
     {% for plant in plot.plant_set.all %}
     <div class="flex justify-center">
-        <div
-            class="bg-green-200 border border-gray-900 min-w-40 min-h-40 p-4 flex flex-col items-center rounded-md shadow-lg">
-            <h2 class="text-xl font-bold mb-2">{{ plant.name }}</h2>
-            <p class="text-sm"><strong>Planted:</strong> {{ plant.days_since_planted }} days ago</p>
-            <p class="text-sm"><strong>Matures In:</strong> {{ plant.days_until_mature }} days</p>
+        <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 p-6 flex flex-col items-center rounded-lg shadow-xl transition transform hover:scale-105">
+            <h2 class="text-2xl font-bold mb-2 text-gray-800">{{ plant.name }}</h2>
+            {% if plant.days_since_planted > 0 %}
+            <p class="mt-2 text-gray-700"><strong>Planted:</strong> {{ plant.days_since_planted }} day(s) ago</p>
+        {% else %}
+            <p class="mt-2 text-gray-700"><strong>Planted:</strong> Today</p>
+        {% endif %}        
+            <p class="text-sm text-gray-600"><strong>Matures In:</strong> {{ plant.days_until_mature }} days</p>
             <div class="flex flex-wrap justify-center mt-4 gap-2">
-                <a class="btn-edit plot-btn px-4 py-2 bg-yellow-400 rounded-md text-black font-bold"
+                <a class="btn-edit plot-btn px-4 py-2 bg-yellow-400 rounded-md text-black font-bold hover:bg-yellow-500" 
                     href="{% url 'plant-update' garden_id=plot.garden.id plot_id=plot.id pk=plant.id %}">Edit</a>
-                <a class="btn-delete plot-btn px-4 py-2 bg-red-500 rounded-md text-white font-bold"
+                <a class="btn-delete plot-btn px-4 py-2 bg-red-500 rounded-md text-white font-bold hover:bg-red-600" 
                     href="{% url 'plant-delete' garden_id=plot.garden.id plot_id=plot.id pk=plant.id %}">Delete</a>
             </div>
         </div>
@@ -25,8 +27,8 @@
     {% endfor %}
     {% else %}
     <div class="col-span-full">
-        <div class="p-6 text-center rounded-md shadow">
-            <p>No plants in this plot yet. Click "Add Plant" to start growing something new!</p>
+        <div class="p-8 text-center rounded-lg shadow-md bg-white">
+            <p class="text-lg text-gray-700">No plants in this plot yet. Click "Add Plant" to start growing something new!</p>
         </div>
     </div>
     {% endif %}
@@ -34,8 +36,8 @@
 
 {% if not show_form %}
 <div class="flex justify-center mt-20 add-card ">
-    <a href="?add_plant=true"
-        class="btn-add-plant bg-green-600 text-xl text-white font-bold px-6 py-3 rounded-md shadow-lg">
+    <a href="?add_plant=true" 
+        class="btn-add-plant bg-green-600 text-xl text-white font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 transition-all">
         Add Plant
     </a>
 </div>
@@ -44,16 +46,18 @@
 {% if show_form %}
 <div class="flex justify-center mt-10">
     <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-8 w-full max-w-md">
-        <h2 class="text-2xl font-bold mb-4 text-center">Add a New Plant</h2>
+        <h2 class="text-3xl font-bold mb-4 text-center text-green-700">Add a New Plant</h2>
         <form method="post" class="flex flex-col gap-6">
             {% csrf_token %}
-            {{ form.as_p }}
+            <div class="space-y-4">
+                {{ form.as_p }}
+            </div>
             <div class="flex justify-center gap-4 mt-6">
-                <button type="submit"
+                <button type="submit" 
                     class="px-6 py-3 bg-green-600 text-white rounded-md font-bold hover:bg-green-700 transition-all">
                     Confirm
                 </button>
-                <a href="{% url 'plot-detail' plot_id=plot.id %}"
+                <a href="{% url 'plot-detail' plot_id=plot.id %}" 
                     class="px-6 py-3 bg-red-500 text-white rounded-md font-bold hover:bg-red-600 transition-all">
                     Cancel
                 </a>
@@ -62,6 +66,5 @@
     </div>
 </div>
 {% endif %}
-
 
 {% endblock %}

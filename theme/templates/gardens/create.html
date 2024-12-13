@@ -1,15 +1,22 @@
 {% extends "base.html" %}
 
-
-
 {% block content %}
-<h2>Create a New Garden</h2>
-<div class="flex flex-col flex-wrap justify-center items-center border m-auto w-fit h-fit">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_table }}
-        <button type="submit" class="border border-4  border-black rounded-md bg-green-600 shadow-lg mx-32 w-32">Create
-            Garden</button>
-    </form>
+
+<div class="container mx-auto py-10">
+    <div class="flex justify-center items-center min-h-screen bg-gradient-to-r from-green-100 to-green-50">
+        <div class="bg-white p-10 rounded-2xl shadow-2xl max-w-md w-full">
+            <h3 class="text-xl font-semibold text-center text-gray-700 mb-6">Let's Grow Something Beautiful Together</h3>
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                <div class="space-y-4">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg w-full transition duration-200 transform hover:scale-105">Create Garden</button>
+            </form>
+            <p class="mt-6 text-center text-gray-500">Changed your mind? 
+                <a href="{% url 'garden-index' %}" class="text-green-500 font-bold hover:underline">Return to My Gardens</a>
+            </p>
+        </div>
+    </div>
 </div>
 {% endblock %}

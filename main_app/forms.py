@@ -35,7 +35,3 @@ class PlantForm(forms.ModelForm):
             'days_until_mature': 'Days Until Maturity',
             'description': 'Plant Description'
         }
-
-
-
-

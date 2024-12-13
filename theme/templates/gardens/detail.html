@@ -3,10 +3,11 @@
 
 {% block content %}
 <h1 class="flex justify-center m-auto mb-6"><strong>Garden: </strong>{{garden.name}}</h1>
-<div class="grid grid-cols-flow grid-flow-row gap-4 mx-14 mb-10">
+<div class="grid grid-cols-1 gap-4 mx-14 mb-10">
     <div class="card-container">
         {% if garden.plot_set.count > 0 %}
         {% for plot in garden.plot_set.all %}
+
         <div class="plot-card relative">
             <div
                 class="plot-card bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col rounded-md">
@@ -28,17 +29,18 @@
                                 <a class="plot-btn btn-delete plot-btn w-0.5"
                                     href="{% url 'plot-delete' plot.id %}">Delete</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <a href="{% url 'plot-detail' plot.id %}">
-                    <h2 class="text-xl font-bold">{{ plot.name }}</h2>
-                    <h3><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
-                    <p><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
-                </a>
-                <div class="flex flex-wrap justify-center m-2">
-                    <a class="plot-btn btn-water plot-btn w-full" href="{% url 'plot-water' plot.id %}">Water Plot</a>
-                </div>
+            </div>
+            <a href="{% url 'plot-detail' plot.id %}" class="block w-full text-center">
+                <h2 class="text-xl font-bold">{{ plot.name }}</h2>
+                <h3><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
+                <p><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
+            </a>
+            <div class="flex flex-wrap justify-center m-2">
+                <a class="plot-btn btn-water plot-btn w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md" href="{% url 'plot-water' plot.id %}">Water Plot</a>
             </div>
         </div>
         {% endfor %}
@@ -53,10 +55,8 @@
     </div>
 </div>
 
-<div class="flex justify-center mt-auto add-card">
-    <a href="{% url 'plot-create' garden.id%}" class="add-card" style="margin-top: 20px">
-        <p class="bg-green-600 text-xl font-bold flex justify-center  w-fit">Add a Plot</p>
-    </a>
+<div class="flex justify-center mt-auto">
+    <a href="{% url 'plot-create' garden.id %}" class="bg-green-600 text-xl font-bold flex justify-center w-full p-4 rounded-md text-center">Add a Plot</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
