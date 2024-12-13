@@ -56,7 +56,7 @@ body {
   /* Elegant and organic font */
   margin: 0;
   padding: 0;
-  background-color: #f7f5f0;
+  background-color: beige;
   /* Light cream */
   color: #5a5a5a;
   /* Dark gray */
@@ -134,19 +134,17 @@ body {
   font-weight: bold;
   color: white;
   background-color: #4caf50;
-  /* Green */
+
   border: none;
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s;
   font-family: "Lora", serif;
-  /* Matching button font */
 }
 
 .start-garden-button:hover {
   background-color: #45a049;
-  /* Darker green on hover */
 }
 
 .card-container {
@@ -167,7 +165,6 @@ body {
 
 .add-card {
   text-align: center;
-  /* background-color: #d5f5e3; */
 }
 
 .logout-btn {
@@ -204,23 +201,15 @@ img {
   border-radius: 20px;
 }
 
-.garden-card {
-  display: flex;
-  flex-wrap: wrap;
-
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-}
-
-.garden-container {
-  gap: 10px;
-}
-
 .plot-card {
   position: relative;
   margin: 0px;
   padding: 0px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.plot-card:hover {
+  transform: scale(1.025);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .plot-card h2,
@@ -237,12 +226,19 @@ img {
   z-index: 100;
 }
 
+.garden-card .dropdown-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
 .plot-card .dropdown-button button {
   cursor: pointer;
   margin-top: -7px;
 }
 
-.dropdown-button button {
+.plot-card .dropdown-button button {
   width: 30px;
   transition: transform 0.3s;
   transform-origin: center center;
@@ -269,6 +265,14 @@ img {
   width: 120px;
 }
 
+.plot-card .dropdown-button {
+  display: none;
+}
+
+.plot-card:hover .dropdown-button {
+  display: block;
+}
+
 .dropdown-menu {
   top: 30px;
   right: 0;
@@ -279,7 +283,7 @@ img {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-menu .plot-btn {
+.dropdown-menu .dropdown-menu .plot-btn {
   margin: 5px 0;
 }
 
@@ -327,4 +331,75 @@ img {
 nav {
   width: auto;
   height: auto;
+}
+
+nav a h1 {
+  width: auto;
+  height: auto;
+}
+
+/* .garden-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 5px;
+} */
+
+.garden-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.garden-card:hover {
+  transform: scale(1.025);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.garden-card h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.garden-card h3 {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.garden-card a:hover {
+  text-decoration: underline;
+}
+
+.dropdown-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
+.garden-card .dropdown-menu {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.garden-card .dropdown-menu[x-show="dropdownOpen"] {
+  display: block;
 }

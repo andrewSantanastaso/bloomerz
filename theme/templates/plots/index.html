@@ -3,15 +3,15 @@
 
 
 {% block content %}
-<h1>Plot Index</h1>
+<h1 class="header">My Plots</h1>
 
 <div class="grid grid-cols-flow grid-flow-row gap-4 mx-14 mb-10">
 
     {% for plot in plots %}
     {% if plot %}
-    <div class="plot-card relative grid grid-cols-flow grid-rows-flow max-w-100 max-h-100">
+    <div class="plot-card relative grid grid-cols-flow grid-rows-flow max-w-100 max-h-100 mt-5">
         <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col">
-            <!-- Dropdown button with added class 'dropdown-button' -->
+
             <div class="dropdown-button">
                 <div x-data="{dropdownOpen: false}">
                     <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
@@ -22,7 +22,7 @@
                                 d="M12 6h.01M12 12h.01M12 18h.01" />
                         </svg>
                     </button>
-                    <!-- Dropdown content with added class 'dropdown-menu' -->
+
                     <div x-show="dropdownOpen" class="dropdown-menu">
                         <div class="flex flex-wrap justify-center m-2">
                             <a class="plot-btn btn-edit plot-btn w-0.5" href="{% url 'plot-update' plot.id %}">Edit</a>
@@ -39,7 +39,7 @@
                 <p><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
             </a>
             <div class="flex flex-wrap justify-center m-2">
-                <a class="plot-btn btn-water plot-btn w-full" href="{% url 'plot-water' plot.id %}">Water Plot</a>
+                <a class="plot-btn btn-water w-full" href="{% url 'plot-water' plot.id %}">Water Plot</a>
             </div>
         </div>
     </div>
