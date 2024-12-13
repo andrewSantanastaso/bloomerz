@@ -28,6 +28,20 @@ nav ul:last-child {
   cursor: pointer;
 }
 
+.btn-cancel {
+  background-color: #2287eb;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 0.375rem;
+}
+
 .btn-water {
   background-color: #007bff;
   color: white;
@@ -377,7 +391,7 @@ nav a h1 {
   margin-bottom: 15px;
 }
 
-.garden-card a:hover {
+.garden-card a:btmnhover {
   text-decoration: underline;
 }
 
