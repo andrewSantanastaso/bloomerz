@@ -19,7 +19,8 @@
 
 </head>
 
-<body>
+<body style="background-image: url('{% static " Garden.png" %}');">
+
 	<header>
 
 
@@ -30,7 +31,7 @@
 				<div>
 					<a href="{% url 'home' %}">
 						<h1>Bloomerz</h1>
-				</a>				
+					</a>
 				</div>
 				<div>
 					{% if user.is_authenticated %}
@@ -67,7 +68,10 @@
 			</div>
 		</nav>
 	</header>
+
+
 	{% block content %}
+
 	{% endblock %}
 
 </body>

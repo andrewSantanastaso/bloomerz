@@ -2,59 +2,57 @@
 {% load static %}
 
 {% block content %}
-<h1 class="flex justify-center m-auto mb-6"><strong>Garden: </strong>{{garden.name}}</h1>
-<div class="grid grid-cols-flow grid-flow-row gap-4 mx-14 mb-10">
-    <div class="card-container">
-        {% if garden.plot_set.count > 0 %}
-        {% for plot in garden.plot_set.all %}
-        <div class="plot-card relative">
-            <div
-                class="plot-card bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col rounded-md">
-                <div class="dropdown-button">
-                    <div x-data="{dropdownOpen: false}">
-                        <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="bg-black"
-                                viewBox="-10 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                    d="M12 6h.01M12 12h.01M12 18h.01" />
-                            </svg>
-                        </button>
+<h1 class="header">Garden: {{garden.name}}</h1 <div class="grid grid-cols-flow grid-flow-row gap-4 mx-14 mb-10">
+<div class="card-container">
+    {% if garden.plot_set.count > 0 %}
+    {% for plot in garden.plot_set.all %}
+    <div class="plot-card relative">
+        <div
+            class="plot-card bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col rounded-md">
+            <div class="dropdown-button">
+                <div x-data="{dropdownOpen: false}">
+                    <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="bg-black"
+                            viewBox="-10 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                d="M12 6h.01M12 12h.01M12 18h.01" />
+                        </svg>
+                    </button>
 
-                        <div x-show="dropdownOpen" class="dropdown-menu">
-                            <div class="flex flex-wrap justify-center m-2">
-                                <a class="plot-btn btn-edit plot-btn w-0.5"
-                                    href="{% url 'plot-update' plot.id %}">Edit</a>
-                                <a class="plot-btn btn-delete plot-btn w-0.5"
-                                    href="{% url 'plot-delete' plot.id %}">Delete</a>
-                            </div>
+                    <div x-show="dropdownOpen" class="dropdown-menu">
+                        <div class="flex flex-wrap justify-center m-2">
+                            <a class="plot-btn btn-edit plot-btn w-0.5" href="{% url 'plot-update' plot.id %}">Edit</a>
+                            <a class="plot-btn btn-delete plot-btn w-0.5"
+                                href="{% url 'plot-delete' plot.id %}">Delete</a>
                         </div>
                     </div>
                 </div>
-                <div style="padding: 10px 10px;">
-                    <a href="{% url 'plot-detail' plot.id %}">
-                        <h2 class="text-xl font-bold">{{ plot.name }}</h2>
-                        <h3><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
-                        <p><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
-                    </a>
+            </div>
+            <div style="padding: 10px 10px;">
+                <a href="{% url 'plot-detail' plot.id %}">
+                    <h2 class="text-xl font-bold">{{ plot.name }}</h2>
+                    <h3><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
+                    <p><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
+                </a>
 
-                    <div class="flex flex-wrap justify-center m-2 pb-0">
-                        <a class="plot-btn btn-water plot-btn w-full" href="{% url 'plot-water' plot.id %}">Water
-                            Plot</a>
-                    </div>
+                <div class="flex flex-wrap justify-center m-2 pb-0">
+                    <a class="plot-btn btn-water plot-btn w-full" href="{% url 'plot-water' plot.id %}">Water
+                        Plot</a>
                 </div>
             </div>
         </div>
-        {% endfor %}
-        {% else %}
-        <div class="flex justify-center mt-20">
-            <div class="p-6 rounded-lg shadow-lg text-center">
-                <h2 class="text-2xl font-bold mb-2" style="text-align: center;">No Plots Available</h2>
-                <p class="text-gray-700">Start by adding a new plot to this garden!</p>
-            </div>
-        </div>
-        {% endif %}
     </div>
+    {% endfor %}
+    {% else %}
+    <div class="flex justify-center mt-20">
+        <div class="p-6 rounded-lg shadow-lg text-center">
+            <h2 class="text-2xl font-bold mb-2" style="text-align: center;">No Plots Available</h2>
+            <p class="text-gray-700">Start by adding a new plot to this garden!</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
 </div>
 
 <div class="flex justify-center mt-auto add-card">
