@@ -39,7 +39,7 @@
 						<li><a href="{% url 'plant-index' %}">My Plants</a></li>
 
 						<li><a href="{% url 'urgent-plots' %}"><img src="{% static 'water_drop.png' %}" alt="water_drop"
-									class="water-drop"></a>
+									class="water"></a>
 							{% if urgent_plots_count > 0 %}
 							<span class="notification-badge">{{ urgent_plots_count }}</span>
 							{% endif %}
