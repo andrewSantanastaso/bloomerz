@@ -28,7 +28,9 @@
 
 			<div class="flex justify-between items-center px-4 py-2 max-h-1">
 				<div>
-					<h1>Bloomerz</h1>
+					<a href="{% url 'home' %}">
+						<h1>Bloomerz</h1>
+				</a>				
 				</div>
 				<div>
 					{% if user.is_authenticated %}
