@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
 <h1 class="header" style="margin-bottom: 0px;">{{ plot.name }}</h1>
 <h4 class="subheader" style="margin-bottom: 5px ;">{{plot.garden.name}}</h4>
-
 <div class="grid grid-cols-flow grid-flow-row gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-14">
     {% if plot.plant_set.all %}
     {% for plant in plot.plant_set.all %}
@@ -36,7 +34,6 @@
     </div>
     {% endif %}
 </div>
-
 {% if not show_form %}
 <div class="flex justify-center mt-20 add-card ">
     <a href="?add_plant=true"
@@ -45,10 +42,10 @@
     </a>
 </div>
 {% endif %}
-
 {% if show_form %}
 <div class="flex justify-center mt-10">
-    <div class="bg-white border border-gray-200 rounded-lg shadow-lg p-8 w-full max-w-md">
+    <div
+        class="bg-gradient-to-br from-green-200 to-yellow-300 border border-gray-200 rounded-lg shadow-lg p-8 w-full max-w-md">
         <h2 class="text-3xl font-bold mb-4 text-center text-green-700">Add a New Plant</h2>
         <form method="post" class="flex flex-col gap-6">
             {% csrf_token %}
@@ -57,7 +54,7 @@
             </div>
             <div class="flex justify-center gap-4 mt-6">
                 <button type="submit"
-                    class="px-6 py-3 bg-green-600 text-white rounded-md font-bold hover:bg-green-700 transition-all">
+                    class="px-6 py-3 bg-green-500 text-white rounded-md font-bold hover:bg-green-600 transition-all">
                     Confirm
                 </button>
                 <a href="{% url 'plot-detail' plot_id=plot.id %}"
@@ -69,5 +66,4 @@
     </div>
 </div>
 {% endif %}
-
 {% endblock %}

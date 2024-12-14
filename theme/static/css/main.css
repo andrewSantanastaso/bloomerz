@@ -86,6 +86,7 @@ body {
   flex-grow: 1; /* Allow the content to grow and fill the remaining space */
   min-height: 100vh; /* Ensure it takes at least full screen height */
   overflow: auto; /* Allow scrolling if content exceeds screen */
+  text-decoration: solid;
 }
 
 .header {
