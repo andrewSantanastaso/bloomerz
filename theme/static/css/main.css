@@ -2,6 +2,10 @@ nav ul:last-child {
   align-items: flex-end;
 }
 
+nav a {
+  color: black;
+  font-weight: bold;
+}
 .btn-delete {
   background-color: #f44336;
   color: white;
@@ -70,7 +74,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: beige;
-  text-decoration-color: #333;
+  color: #5a5a5a;
   min-height: 100vh; /* Ensure body takes full height of the screen */
   width: 100%;
   overflow-y: auto; /* Allow vertical scrolling */
@@ -83,10 +87,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1; /* Allow the content to grow and fill the remaining space */
-  min-height: 100vh; /* Ensure it takes at least full screen height */
-  overflow: auto; /* Allow scrolling if content exceeds screen */
-  text-decoration: solid;
+  flex-grow: 1;
+  min-height: 100vh;
+  overflow: auto;
 }
 
 .header {
@@ -105,18 +108,15 @@ body {
 }
 
 .description {
+  color: #4a4a4a;
   text-align: center;
   font-size: 1.1rem;
   line-height: 1.6;
   max-width: 600px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  color: black
 }
 
 .description p {
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  color: black
 }
 
 .description ul {
@@ -124,14 +124,10 @@ body {
   margin: 10px auto;
   padding: 0 20px;
   max-width: 500px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  color: black
 }
 
 .description ul li {
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  color: black
 }
 
 .unauthenticated-message-container {
@@ -203,7 +199,7 @@ body {
   border-radius: 5px;
   color: white;
   box-shadow: 0 6px 6px rgba(216, 214, 214, 0.1);
-  text-shadow: #f2f1f1;
+  text-shadow: #0a0a0a;
   border: 1px solid black;
 }
 
@@ -456,13 +452,6 @@ nav a h1 {
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1; /* Keep it in the background */
-}
-
-.main-content {
-  /* position: relative;
-  z-index: 1; */
-  color: #fff;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
 }
 
 .footer-image {
