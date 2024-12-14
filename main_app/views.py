@@ -39,11 +39,7 @@ def garden_index(request):
 
 @login_required
 def plant_index(request):
-    garden = Garden.objects.filter(user=request.user)[:1].get()
-    plots = Plot.objects.filter(garden=garden)
-    plants = []
-    for plot in plots:
-        plants.extend(plot.plant_set.all())
+    plants = Plant.objects.filter(plot__garden__user=request.user)
     return render(request, 'plants/index.html', {'plants': plants})
 
 @login_required
