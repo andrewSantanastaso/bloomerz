@@ -22,9 +22,11 @@
 
 
 			<div class="flex justify-between items-center px-4 py-2 ">
-				<div>
-					<h1>Bloomerz</h1>
-				</div>
+				<a href="{% url 'home' %}">
+					<div>
+						<h1>Bloomerz</h1>
+					</div>
+				</a>
 				<div>
 					{% if user.is_authenticated %}
 					<ul class="flex space-x-4">
