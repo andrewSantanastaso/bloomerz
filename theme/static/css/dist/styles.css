@@ -1056,6 +1056,10 @@ video {
   --tw-gradient-to: #f0fdf4 var(--tw-gradient-to-position);
 }
 
+.to-yellow-300 {
+  --tw-gradient-to: #fde047 var(--tw-gradient-to-position);
+}
+
 .object-contain {
   -o-object-fit: contain;
      object-fit: contain;
