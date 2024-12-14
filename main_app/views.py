@@ -20,11 +20,12 @@ def signup(request):
             login(request, user)
             return redirect('garden-index')
         else:
-            error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
+            error_message = 'Invalid sign up - please check the errors below.'
+    else:
+        form = UserCreationForm()
+
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
-
 
 def home(request):
     return render(request, 'homepage.html')
