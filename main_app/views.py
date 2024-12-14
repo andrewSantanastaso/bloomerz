@@ -6,6 +6,8 @@ from .models import Garden, Plot, Plant
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .forms import PlotForm, GardenForm, PlantForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -26,7 +28,8 @@ def signup(request):
 
 def home(request):
     return render(request, 'homepage.html')
-    
+
+@login_required    
 def garden_index(request):
     gardens = Garden.objects.filter(user=request.user)
     plots = []
@@ -34,6 +37,7 @@ def garden_index(request):
         plots.extend(garden.plot_set.all())
     return render(request, 'gardens/index.html', {'gardens': gardens, 'plots': plots})
 
+@login_required
 def plant_index(request):
     garden = Garden.objects.filter(user=request.user)[:1].get()
     plots = Plot.objects.filter(garden=garden)
@@ -42,6 +46,7 @@ def plant_index(request):
         plants.extend(plot.plant_set.all())
     return render(request, 'plants/index.html', {'plants': plants})
 
+@login_required
 def plot_index(request):
     user_gardens = Garden.objects.filter(user=request.user)
     plots = []
@@ -50,11 +55,11 @@ def plot_index(request):
     
     return render(request, 'plots/index.html', { 'plots': plots})
 
-class garden_detail(DetailView):
+class garden_detail(LoginRequiredMixin,DetailView):
     model = Garden
     template_name = 'gardens/detail.html'
 
-class GardenCreate(CreateView):
+class GardenCreate(LoginRequiredMixin,CreateView):
     model = Garden
     fields = ['name', 'location']
     template_name = 'gardens/create.html'
@@ -63,17 +68,17 @@ class GardenCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class GardenUpdate(UpdateView):
+class GardenUpdate(LoginRequiredMixin,UpdateView):
     model = Garden
     form_class = GardenForm
     template_name = 'gardens/update.html'
 
-class GardenDelete(DeleteView):
+class GardenDelete(LoginRequiredMixin,DeleteView):
     model = Garden
     template_name = 'gardens/delete.html'
     success_url = '/gardens/'
 
-class CreatePlot(CreateView):
+class CreatePlot(LoginRequiredMixin,CreateView):
     model = Plot
     form_class = PlotForm
 
@@ -95,6 +100,7 @@ class CreatePlot(CreateView):
         return context
     
 
+@login_required
 def plot_detail(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     
@@ -113,12 +119,14 @@ def plot_detail(request, plot_id):
     template_name = 'plots/detail.html'
     return render(request, template_name, {'plot': plot, 'form': form, 'garden_id': plot.garden.id, 'show_form': show_form})
 
+@login_required
 def water_plot(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     plot.days_since_watered = 0
     plot.save()
     return redirect(request.META['HTTP_REFERER'])
 
+@login_required
 def urgent_plots(request):
     user_gardens = Garden.objects.filter(user=request.user)
     urgent_plots = []
@@ -134,22 +142,23 @@ def urgent_plots(request):
     
     return render(request, 'plots/urgent.html', {'urgent_plots': urgent_plots})
 
-class UpdatePlot(UpdateView):
+class UpdatePlot(LoginRequiredMixin,UpdateView):
     model = Plot
     fields = ['name', 'days_since_watered', 'frequency']
     template_name = 'plots/update.html'
 
-class DeletePlot(DeleteView):
+class DeletePlot(LoginRequiredMixin,DeleteView):
     model = Plot
     success_url = '/gardens/'
     template_name = 'plots/plot_confirm_delete.html'
 
+@login_required
 def plot_delete(request, plot_id):
     plot = get_object_or_404(Plot, pk=plot_id)
     plot.delete()
     return redirect('garden-detail', pk=plot.garden.id)
     
-class CreatePlant(CreateView):
+class CreatePlant(LoginRequiredMixin,CreateView):
     model = Plant
     fields = ['name', 'dayssinceplanted', 'daysuntilmature', 'description']
     template_name = 'plants/create.html'
@@ -162,20 +171,20 @@ class CreatePlant(CreateView):
                 form.instance.plot = user_plots.first()
         return super().form_valid(form)
 
-class PlantDetail(DetailView):
+class PlantDetail(LoginRequiredMixin,DetailView):
     model = Plant
     template_name = 'plants/detail.html'
 
-class UpdatePlant(UpdateView):
+class UpdatePlant(LoginRequiredMixin,UpdateView):
     model = Plant
     form_class = PlantForm
     template_name = 'plants/update.html'
 
-class DeletePlant(DeleteView):
+class DeletePlant(LoginRequiredMixin,DeleteView):
     model = Plant
     template_name = 'plants/delete.html'
 
-class SignIn(LoginView):
+class SignIn(LoginRequiredMixin,LoginView):
     template_name = 'registration/login.html'
     redirect_authenticated_user = True
     success_url = '/gardens/'
