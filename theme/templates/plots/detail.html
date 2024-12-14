@@ -18,7 +18,7 @@
             <p class="text-sm text-gray-600"><strong>Matures In:</strong> {{ plant.days_until_mature }} days</p>
             <div class="flex flex-wrap justify-center mt-4 gap-2">
                 <a class="btn-edit plot-btn px-4 py-2 bg-yellow-400 rounded-md text-black font-bold hover:bg-yellow-500"
-                    href="{% url 'plant-update' garden_id=plot.garden.id plot_id=plot.id pk=plant.id %}">Edit</a>
+                    href="{% url  'plant-update' plant.id %}">Edit</a>
                 <a class="btn-delete plot-btn px-4 py-2 bg-red-500 rounded-md text-white font-bold hover:bg-red-600"
                     href="{% url 'plant-delete' garden_id=plot.garden.id plot_id=plot.id pk=plant.id %}">Delete</a>
             </div>
@@ -46,11 +46,12 @@
 
 <div class="flex justify-center mt-10">
 
-    <div class="bg-gradient-to-br from-green-200 to-yellow-300 border border-gray-200 rounded-lg shadow-lg p-8 w-full max-w-md">
-        
+    <div
+        class="bg-gradient-to-br from-green-200 to-yellow-300 border border-gray-200 rounded-lg shadow-lg p-8 w-full max-w-md">
+
 
         <h2 class="text-3xl font-bold mb-4 text-center text-green-700">Add a New Plant</h2>
-        
+
         <form method="post" class="flex flex-col gap-6">
             {% csrf_token %}
             <div class="space-y-4">

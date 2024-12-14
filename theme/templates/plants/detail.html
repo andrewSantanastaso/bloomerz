@@ -9,8 +9,8 @@
   <p><strong>Days Since Planted:</strong> {{ plant.days_since_planted }}</p>
   <p><strong>Days Until Mature:</strong> {{ plant.days_until_mature }}</p>
   <hr>
-  <a href="{% url 'plant-update' garden.id plot.id plant.id %}">Update Plant</a>
-  <a href="{% url 'plot-detail' garden_id=plant.plot.garden.id plot_id=plant.plot.id %}" class="btn btn-secondary">Back
+  <a href="{% url 'plant-update' plant.id %}">Update Plant</a>
+  <a href="{% url 'plot-detail'  plant.plot.id %}" class="btn btn-secondary">Back
     to Plot Details</a>
 </div>
 
