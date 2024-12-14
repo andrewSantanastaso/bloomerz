@@ -32,10 +32,10 @@
 						<li><a href="{% url 'garden-index' %}">My Gardens</a></li><span>|</span>
 						<li><a href="{% url 'plot-index'  %}">My Plots</a></li><span>|</span>
 						<li><a href="{% url 'plant-index' %}">My Plants</a></li>
-
+						{% if urgent_plots_count > 0 %}
 						<li><a href="{% url 'urgent-plots' %}"><img src="{% static 'water_drop.png' %}" alt="water_drop"
 									class="water_drop" style="max-width: 30px;"></a>
-							{% if urgent_plots_count > 0 %}
+
 							<span class="notification-badge">{{ urgent_plots_count }}</span>
 							{% endif %}
 						</li>
