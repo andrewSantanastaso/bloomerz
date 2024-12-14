@@ -39,7 +39,7 @@
 							<span class="notification-badge">{{ urgent_plots_count }}</span>
 							{% endif %}
 						</li>
-						<li class="border border-black border-2 p-0 m-0 rounded-md bg-gray-500">
+						<li class="p-0 m-0 rounded-md bg-gray-500 border-none">
 							<form id="logout-form" method="post" action="{% url 'logout' %}">
 								{% csrf_token %}
 

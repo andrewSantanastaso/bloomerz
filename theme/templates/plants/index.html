@@ -7,7 +7,7 @@
 {% if plants %}
 <div class="grid grid-cols-1 gap-4 mx-14">
     {% for plant in plants %}
-    <div class="bg-green-200 border border-gray-900 p-6 flex flex-col items-center w-full rounded-md">
+    <div class="bg-green-200 border border-gray-900 p-6 flex flex-col items-center w-full rounded-md transition-transform duration-200 transform hover:scale-105">
         <h2 class="text-xl font-bold">{{ plant.name }}</h2>
 
         <p class="mt-2 text-center">{{ plant.description }}</p>
