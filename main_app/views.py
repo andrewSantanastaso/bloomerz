@@ -179,7 +179,7 @@ class PlantDetail(LoginRequiredMixin,DetailView):
 
 class UpdatePlant(LoginRequiredMixin,UpdateView):
     model = Plant
-    form_class = PlantForm
+    form_class git = PlantForm
     template_name = 'plants/update.html'
 
 class DeletePlant(LoginRequiredMixin,DeleteView):
