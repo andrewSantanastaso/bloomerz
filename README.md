@@ -6,7 +6,7 @@
 
 ## 📸 **Screenshot/Logo**
 
-<img src='theme/static/Bloomerz_Logo.png'>
+<img src='theme/static/Bloomerz_cropped.jpeg'>
 
 ---
 
