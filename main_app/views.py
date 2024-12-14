@@ -178,6 +178,7 @@ class UpdatePlant(LoginRequiredMixin,UpdateView):
     model = Plant
     form_class = PlantForm
     template_name = 'plants/update.html'
+    success_url = '/plants/'
     
 
 class DeletePlant(LoginRequiredMixin,DeleteView):
