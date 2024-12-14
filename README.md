@@ -20,9 +20,11 @@ We believe that every gardener deserves an app that simplifies the process of tr
 
 ---
 
+
 ## 🚀 **Getting Started**
 
 **Live Application**: [Visit Bloomerz](https://bloomerz-ad5875097a53.herokuapp.com/)
+
 
 **Project Planning Materials**: [View Planning Docs](https://trello.com/b/ngmNblq0/bloomerz)
 
