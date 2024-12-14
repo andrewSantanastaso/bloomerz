@@ -139,8 +139,10 @@ def urgent_plots(request):
             
             if plot.days_since_watered >= plot.frequency:
                 urgent_plots.append(plot)
-    
+    if len(urgent_plots) == 0:
+        return render(request, 'gardens/index.html', {'gardens': user_gardens})
     return render(request, 'plots/urgent.html', {'urgent_plots': urgent_plots})
+
 
 class UpdatePlot(LoginRequiredMixin,UpdateView):
     model = Plot
