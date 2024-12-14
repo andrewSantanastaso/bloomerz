@@ -9,9 +9,9 @@
     {% for plot in plots %}
     {% if plot %}
     <div class="plot-card relative grid grid-cols-flow grid-rows-flow max-w-100 max-h-100 mt-5">
-        <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col p-4" 
+        <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col p-4"
             style="border-radius: 0.375rem;">
-            
+
             <div class="dropdown-button">
                 <div x-data="{dropdownOpen: false}">
                     <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
@@ -31,11 +31,11 @@
                     </div>
                 </div>
             </div>
-            
+
             <a href="{% url 'plot-detail' plot.id %}">
                 <h2 class="text-xl font-bold py-2">{{ plot.name }}</h2>
                 <h3 class="py-2"><strong>Garden: </strong>{{plot.garden.name}}</h3>
-                <h3 class="py-2"><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3> 
+                <h3 class="py-2"><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
                 <p class="py-2"><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
             </a>
 
@@ -57,13 +57,6 @@
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    {% endblock %}
-=======
-{% endblock %}
->>>>>>> 50f7fa591d1856af99fa48f750c74fe91745e06f
-=======
-{% endblock %}
 
->>>>>>> f48603508b2602f2982c113e990d942abf49bd3e
+
+{% endblock %}
