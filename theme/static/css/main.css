@@ -109,12 +109,12 @@ body {
   font-size: 1.1rem;
   line-height: 1.6;
   max-width: 600px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .description p {
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .description ul {
@@ -122,12 +122,12 @@ body {
   margin: 10px auto;
   padding: 0 20px;
   max-width: 500px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .description ul li {
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .unauthenticated-message-container {
