@@ -9,12 +9,9 @@
     {% for plot in plots %}
     {% if plot %}
     <div class="plot-card relative grid grid-cols-flow grid-rows-flow max-w-100 max-h-100 mt-5">
-
-
-        <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col"
+        <div class="bg-green-200 border border-gray-900 min-w-40 min-h-40 flex justify-start flex-col p-4" 
             style="border-radius: 0.375rem;">
-
-
+            
             <div class="dropdown-button">
                 <div x-data="{dropdownOpen: false}">
                     <button @click="dropdownOpen = !dropdownOpen" class="focus:outline-none focus:border-white">
@@ -35,12 +32,14 @@
                     </div>
                 </div>
             </div>
+            
             <a href="{% url 'plot-detail' plot.id %}">
-                <h2 class="text-xl font-bold">{{ plot.name }}</h2>
-                <h3><strong>Garden: </strong>{{plot.garden.name}}</h3>
-                <h3><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3>
-                <p><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
+                <h2 class="text-xl font-bold py-2">{{ plot.name }}</h2>
+                <h3 class="py-2"><strong>Garden: </strong>{{plot.garden.name}}</h3>
+                <h3 class="py-2"><strong>Days Since Last Watering:</strong> {{plot.days_since_watered}}</h3> 
+                <p class="py-2"><strong>Total Plants: </strong>{{plot.plant_set.count}}</p>
             </a>
+
             <div class="flex flex-wrap justify-center m-2">
                 <a class="plot-btn btn-water w-full" href="{% url 'plot-water' plot.id %}">Water Plot</a>
             </div>
@@ -48,14 +47,15 @@
     </div>
     {% else %}
     <div class="flex justify-center mt-20">
-        <div class=" p-6 rounded-lg shadow-lg text-center">
+        <div class="p-6 rounded-lg shadow-lg text-center">
             <h2 class="text-2xl font-bold mb-2" style="text-align: center;">No Plots Available</h2>
             <p class="text-gray-700">Start by adding a new plot to one of your gardens!</p>
         </div>
-        {% endif %}
-        {% endfor %}
     </div>
+    {% endif %}
+    {% endfor %}
+</div>
 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
-    {% endblock %}
+{% endblock %}
