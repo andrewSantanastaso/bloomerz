@@ -161,7 +161,7 @@ class CreatePlant(LoginRequiredMixin,CreateView):
     model = Plant
     fields = ['name', 'dayssinceplanted', 'daysuntilmature', 'description']
     template_name = 'plants/create.html'
-    # Assigns the plant with the first plot of the logged in user
+
     def form_valid(self, form):
         user_gardens = Garden.objects.filter(user=self.request.user)
         if user_gardens.exists():
